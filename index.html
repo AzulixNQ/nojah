@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nojah, trader funded</title>
+<meta name="description" content="Nojah, trader funded. Je trade le Nasdaq et je documente tout mon parcours en live : Telegram Nojah HUB, TikTok, Instagram, YouTube, Discord, mes payouts et –20 % sur FTMO.">
+<meta name="theme-color" content="#120A29">
+<meta name="format-detection" content="telephone=no">
+<link rel="canonical" href="https://azulixnq.github.io/nojah/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:url" content="https://azulixnq.github.io/nojah/">
+<meta property="og:title" content="Nojah, trader funded">
+<meta property="og:description" content="Je trade le Nasdaq et je documente tout mon parcours en live. Rejoins le Telegram Nojah HUB.">
+<meta property="og:image" content="https://azulixnq.github.io/nojah/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Nojah, trader funded : je documente mon parcours en live.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preload" href="fonts/poppins-700.woff" as="font" type="font/woff" crossorigin>
+<style>
+/* Poppins, the face of his clip captions, self-hosted (Latin subset, SIL OFL 1.1). */
+@font-face { font-family: "Poppins"; src: url("fonts/poppins-400.woff") format("woff"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Poppins"; src: url("fonts/poppins-500.woff") format("woff"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "Poppins"; src: url("fonts/poppins-700.woff") format("woff"); font-weight: 700; font-style: normal; font-display: swap; }
+
+/* One bold move: the turning "live" ring around his monogram and the violet light behind it.
+   Everything else is flat and quiet. Money is always mint, actions are always orchid. */
+:root {
+  --night: #120A29;   /* page */
+  --dusk: #1D1240;    /* surfaces */
+  --dusk-2: #271855;  /* surface, pressed */
+  --line: #34255F;    /* hairlines */
+  --orchid: #F25BD9;  /* his pink: actions */
+  --plum: #B5179A;    /* pink on light ground */
+  --iris: #8F70FF;    /* second hue of the light */
+  --mint: #52E3A4;    /* money */
+  --pearl: #F7F2FF;   /* text */
+  --haze: #B7A9D9;    /* secondary text */
+  --ink: #1A0A2E;     /* text on pink and pearl */
+  --font: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--night);
+  color: var(--pearl);
+  font: 400 16px/1.6 var(--font);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--mint); outline-offset: 3px; }
+.ico { width: 24px; height: 24px; flex: none; }
+
+.page {
+  isolation: isolate;
+  max-width: 1040px;
+  margin: 0 auto;
+  padding:
+    max(20px, env(safe-area-inset-top))
+    max(18px, env(safe-area-inset-right))
+    max(28px, env(safe-area-inset-bottom))
+    max(18px, env(safe-area-inset-left));
+}
+
+/* ---------- profile ---------- */
+.profile {
+  position: relative;
+  max-width: 420px;
+  margin: 0 auto;
+  padding-top: 40px;
+  text-align: center;
+}
+.profile::before {
+  content: "";
+  position: absolute; z-index: -1; left: 50%; top: -20px;
+  width: min(520px, 100vw); height: 380px;
+  transform: translateX(-50%);
+  background:
+    radial-gradient(closest-side at 40% 44%, rgba(242, 91, 217, .36), transparent),
+    radial-gradient(closest-side at 63% 36%, rgba(143, 112, 255, .44), transparent);
+  pointer-events: none;
+}
+.avatar {
+  position: relative;
+  display: grid; place-items: center;
+  width: 122px; height: 122px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+}
+.avatar::before {
+  content: "";
+  position: absolute; inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(var(--orchid), var(--iris), var(--mint), var(--orchid));
+  animation: turn 10s linear infinite;
+}
+@keyframes turn { to { transform: rotate(1turn); } }
+.avatar span {
+  position: relative;
+  display: grid; place-items: center;
+  width: 108px; height: 108px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 32% 26%, #34206F, #170D36 72%);
+  box-shadow: 0 0 0 4px var(--night);
+  font-weight: 700; font-size: 52px; line-height: 1; letter-spacing: -.02em;
+  padding-top: .08em;
+}
+.name {
+  margin: 0;
+  font-weight: 700;
+  font-size: clamp(42px, 12vw, 54px);
+  line-height: 1.05;
+  letter-spacing: -.025em;
+}
+.bio {
+  margin: 10px auto 0;
+  max-width: 29ch;
+  text-wrap: balance;
+  color: var(--haze);
+  font-size: 16.5px;
+  line-height: 1.55;
+}
+
+/* Telegram, the main door */
+.cta {
+  display: flex; align-items: center; gap: 14px;
+  max-width: 400px; min-height: 68px;
+  margin: 28px auto 0;
+  padding: 12px 20px 12px 13px;
+  border-radius: 20px;
+  background: var(--orchid); color: var(--ink);
+  text-align: left; text-decoration: none;
+  box-shadow: 0 16px 36px -16px rgba(242, 91, 217, .75);
+  transition: transform .12s ease, background-color .12s ease;
+}
+.cta:hover { background: #F672E0; }
+.cta:active { transform: scale(.98); }
+.cta-ico {
+  flex: none;
+  display: grid; place-items: center;
+  width: 44px; height: 44px;
+  border-radius: 14px;
+  background: var(--ink); color: var(--orchid);
+}
+.cta-ico .ico { width: 22px; height: 22px; }
+.cta-text { flex: 1; }
+.cta-text strong { display: block; font-weight: 700; font-size: 17px; line-height: 1.25; }
+.cta-text small { display: block; margin-top: 1px; font-size: 13.5px; font-weight: 500; line-height: 1.3; color: #4A1F55; }
+
+/* the four networks */
+.socials {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px;
+  max-width: 400px;
+  margin: 22px auto 0; padding: 0;
+  list-style: none;
+}
+.socials a {
+  display: grid; justify-items: center; gap: 7px;
+  padding: 4px 0;
+  color: var(--haze); text-decoration: none;
+  font-size: 13px; font-weight: 500; line-height: 1.2;
+}
+.dot {
+  display: grid; place-items: center;
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: var(--dusk); border: 1px solid var(--line);
+  color: var(--pearl);
+  transition: border-color .12s ease, background-color .12s ease;
+}
+.socials a:hover { color: var(--pearl); }
+.socials a:hover .dot { border-color: var(--orchid); }
+.socials a:active .dot { background: var(--dusk-2); }
+
+/* ---------- content ---------- */
+.content { display: grid; gap: 56px; margin-top: 60px; }
+.sec-title {
+  margin: 0 0 16px;
+  font-weight: 700; font-size: 24px; line-height: 1.2; letter-spacing: -.015em;
+}
+.money { color: var(--mint); font-weight: 700; white-space: nowrap; }
+
+/* payouts: his real Lucid capture, untouched */
+.shot {
+  display: block;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #0A0A0A;
+  border: 1px solid rgba(82, 227, 164, .3);
+  box-shadow: 0 26px 60px -30px rgba(82, 227, 164, .5);
+}
+.shot img { width: 100%; }
+.caption { margin: 16px 0 0; color: var(--haze); }
+.caption strong { color: var(--pearl); font-weight: 500; }
+.hint { margin: 4px 0 0; font-size: 13.5px; color: var(--haze); }
+
+/* FTMO: a coupon you tear off */
+.coupon { color: var(--ink); filter: drop-shadow(0 22px 40px rgba(0, 0, 0, .35)); }
+.coupon-top, .coupon-bottom { position: relative; padding: 22px; }
+.coupon-top {
+  border-radius: 20px 20px 0 0;
+  background:
+    radial-gradient(circle at 0 100%, transparent 13px, var(--pearl) 13.5px) left / 51% 100% no-repeat,
+    radial-gradient(circle at 100% 100%, transparent 13px, var(--pearl) 13.5px) right / 51% 100% no-repeat;
+  padding-bottom: 24px;
+}
+.coupon-bottom {
+  border-radius: 0 0 20px 20px;
+  background:
+    radial-gradient(circle at 0 0, transparent 13px, var(--pearl) 13.5px) left / 51% 100% no-repeat,
+    radial-gradient(circle at 100% 0, transparent 13px, var(--pearl) 13.5px) right / 51% 100% no-repeat;
+  padding-top: 24px;
+}
+.coupon-bottom::before {
+  content: "";
+  position: absolute; top: 0; left: 24px; right: 24px;
+  border-top: 2px dashed rgba(26, 10, 46, .22);
+}
+.off { margin: 0; color: var(--plum); font-weight: 700; font-size: 76px; line-height: .95; letter-spacing: -.04em; }
+.off-what { margin: 6px 0 0; font-weight: 700; font-size: 21px; line-height: 1.25; }
+.off-text { margin: 10px 0 0; color: #3D2A5C; font-size: 15.5px; }
+.fine { margin: 12px 0 0; color: #5B4A7A; font-size: 13px; text-align: center; }
+
+.btn {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 54px;
+  padding: 12px 20px;
+  border-radius: 14px;
+  font-weight: 700; font-size: 16px; line-height: 1.2;
+  text-align: center; text-decoration: none;
+  transition: transform .12s ease, background-color .12s ease, border-color .12s ease;
+}
+.btn:active { transform: scale(.98); }
+.btn-ink { background: var(--ink); color: var(--pearl); }
+.btn-ink:hover { background: #2C1650; }
+.btn-line { border: 1.5px solid var(--orchid); color: var(--pearl); }
+.btn-line:hover { background: rgba(242, 91, 217, .12); }
+
+/* clipping */
+.clip {
+  padding: 22px;
+  border-radius: 20px;
+  background: var(--dusk);
+  border: 1px solid var(--line);
+}
+.clip-text { margin: 0; color: var(--haze); }
+.steps {
+  display: grid; gap: 14px;
+  margin: 20px 0 22px; padding: 0;
+  list-style: none; counter-reset: step;
+}
+.steps li {
+  counter-increment: step;
+  display: grid; grid-template-columns: 30px 1fr; gap: 12px; align-items: start;
+  color: var(--haze);
+}
+.steps li::before {
+  content: counter(step);
+  display: grid; place-items: center;
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  border: 1.5px solid var(--orchid);
+  color: var(--pearl);
+  font-weight: 700; font-size: 14px; line-height: 1;
+}
+.steps strong { color: var(--pearl); font-weight: 500; }
+
+/* ---------- footer ---------- */
+.foot {
+  margin-top: 64px; padding-top: 22px;
+  border-top: 1px solid var(--line);
+  color: var(--haze);
+  font-size: 13px; line-height: 1.6;
+}
+.foot p { margin: 0 0 10px; max-width: 72ch; }
+
+@media (min-width: 960px) {
+  .page {
+    display: grid;
+    grid-template-columns: 400px minmax(0, 560px);
+    justify-content: center;
+    column-gap: 80px;
+    padding-top: 48px;
+  }
+  .profile { position: sticky; top: 40px; align-self: start; margin: 0; padding-top: 32px; }
+  .content { margin-top: 0; padding-top: 40px; }
+  .foot { grid-column: 1 / -1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .avatar::before { animation: none; }
+  .cta, .btn, .dot { transition: none; }
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="M21.5 3.2 2.9 10.6c-.9.4-.9 1.6 0 1.9l4.6 1.6 1.7 5.4c.3.8 1.3 1 1.9.4l2.6-2.5 4.6 3.4c.7.5 1.7.1 1.9-.7L22.9 4.6c.2-1-.6-1.8-1.4-1.4Z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="m7.6 14.1 10.1-7.3-7.9 8.7" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/></symbol>
+  <symbol id="i-notes" viewBox="0 0 24 24"><path d="M9 18V6.5l11-2.5v12" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><circle cx="6.5" cy="18" r="2.6" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="17.5" cy="16" r="2.6" fill="none" stroke="currentColor" stroke-width="1.9"/></symbol>
+  <symbol id="i-camera" viewBox="0 0 24 24"><path d="M4 7.5h3.2l1.6-2.5h6.4l1.6 2.5H20a1.5 1.5 0 0 1 1.5 1.5v9a1.5 1.5 0 0 1-1.5 1.5H4A1.5 1.5 0 0 1 2.5 18V9A1.5 1.5 0 0 1 4 7.5Z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><circle cx="12" cy="13.2" r="3.6" fill="none" stroke="currentColor" stroke-width="1.9"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.2" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="m10 8.4 5.8 3.6-5.8 3.6z" fill="currentColor"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 4.5h10.5A1.5 1.5 0 0 1 16 6v6a1.5 1.5 0 0 1-1.5 1.5H9.2L5.5 16.5v-3H4A1.5 1.5 0 0 1 2.5 12V6A1.5 1.5 0 0 1 4 4.5Z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M18.5 8.5H20A1.5 1.5 0 0 1 21.5 10v6a1.5 1.5 0 0 1-1.5 1.5h-1.5v3l-3.7-3H11a1.5 1.5 0 0 1-1.5-1.5v-.3" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/></symbol>
+  <symbol id="i-cut" viewBox="0 0 24 24"><circle cx="6" cy="6" r="3" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="6" cy="18" r="3" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="M8.5 7.5 20 18M8.5 16.5 20 6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></symbol>
+</svg>
+
+<div class="page">
+  <header class="profile">
+    <div class="avatar" aria-hidden="true"><span>N</span></div>
+    <h1 class="name">Nojah</h1>
+    <p class="bio">Trader funded. Je trade le Nasdaq et je documente tout mon parcours en live.</p>
+
+    <a class="cta" href="https://t.me/+zSf9D4ee_4w5NzM0" target="_blank" rel="noopener">
+      <span class="cta-ico"><svg class="ico" aria-hidden="true"><use href="#i-send"/></svg></span>
+      <span class="cta-text"><strong>Rejoindre le Telegram</strong><small>Nojah HUB, la communauté</small></span>
+    </a>
+
+    <nav aria-label="Mes réseaux">
+      <ul class="socials">
+        <li><a href="https://www.tiktok.com/@nojahonorderflow" target="_blank" rel="noopener" aria-label="TikTok, @nojahonorderflow"><span class="dot"><svg class="ico" aria-hidden="true"><use href="#i-notes"/></svg></span>TikTok</a></li>
+        <li><a href="https://www.instagram.com/fx_nojah" target="_blank" rel="noopener" aria-label="Instagram, @fx_nojah"><span class="dot"><svg class="ico" aria-hidden="true"><use href="#i-camera"/></svg></span>Instagram</a></li>
+        <li><a href="https://www.youtube.com/@FXJohanBDX" target="_blank" rel="noopener" aria-label="YouTube, @FXJohanBDX"><span class="dot"><svg class="ico" aria-hidden="true"><use href="#i-play"/></svg></span>YouTube</a></li>
+        <li><a href="https://discord.gg/zVJuSdCjSG" target="_blank" rel="noopener" aria-label="Discord, le serveur de la communauté"><span class="dot"><svg class="ico" aria-hidden="true"><use href="#i-chat"/></svg></span>Discord</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="content">
+    <section aria-labelledby="payouts-title">
+      <h2 class="sec-title" id="payouts-title">Mes payouts</h2>
+      <a class="shot" href="payouts-lucid.webp" target="_blank" rel="noopener">
+        <img src="payouts-lucid.webp" width="760" height="713" loading="lazy" decoding="async"
+             alt="Capture de mon tableau Lucid Trading, Funded Payouts : 31 491 $ reçus au total, 18 payouts, le plus gros de 2 500 $, depuis juin 2026.">
+      </a>
+      <p class="caption"><strong>18 payouts</strong> reçus sur mes comptes funded Lucid Trading depuis juin 2026, pour un total de <span class="money">31&nbsp;491&nbsp;$</span>. Le plus gros&nbsp;: <span class="money">2&nbsp;500&nbsp;$</span>.</p>
+      <p class="hint">Appuie sur la capture pour la voir en grand.</p>
+    </section>
+
+    <section aria-labelledby="ftmo-title">
+      <h2 class="sec-title" id="ftmo-title">Passe funded toi aussi</h2>
+      <div class="coupon">
+        <div class="coupon-top">
+          <p class="off" aria-hidden="true">–20&nbsp;%</p>
+          <p class="off-what">sur ton challenge FTMO</p>
+          <p class="off-text">Passe par mon lien et ton challenge te coûte 20&nbsp;% moins cher. J’ai moi-même validé les deux étapes du challenge FTMO.</p>
+        </div>
+        <div class="coupon-bottom">
+          <a class="btn btn-ink" href="https://join.ftmo.com/SnUMuuJKSUnsmcjlAEpE" target="_blank" rel="noopener sponsored">Profiter des –20&nbsp;%</a>
+          <p class="fine">Lien affilié. Un challenge est payant et peut être perdu.</p>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="clip-title">
+      <h2 class="sec-title" id="clip-title">Clippe mes lives</h2>
+      <div class="clip">
+        <p class="clip-text">Je partage les rushs de mes lives sur mon serveur Discord Clipping FxNojah. Tu en fais des clips, tu les postes, et tu es payé selon tes vues.</p>
+        <ol class="steps">
+          <li><span><strong>Rejoins le serveur</strong>, c’est gratuit.</span></li>
+          <li><span><strong>Fais vérifier ton compte</strong> en ouvrant un ticket.</span></li>
+          <li><span><strong>Déclare chaque clip</strong> dans les 48&nbsp;h qui suivent sa publication.</span></li>
+        </ol>
+        <a class="btn btn-line" href="https://discord.gg/uJKeJqDhf" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-cut"/></svg>Rejoindre Clipping FxNojah</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p>Le trading comporte un risque élevé de perte en capital. Je partage mon parcours&nbsp;: ce ne sont pas des conseils en investissement, et les résultats passés ne garantissent pas les résultats futurs.</p>
+    <p>Les liens FTMO de cette page sont des liens affiliés. FTMO et Lucid Trading sont des marques de leurs propriétaires.</p>
+    <p>© 2026 Nojah. Site hébergé par GitHub Pages.</p>
+  </footer>
+</div>
+</body>
+</html>
