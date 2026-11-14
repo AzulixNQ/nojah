@@ -1,382 +1,1015 @@
 <!doctype html>
-<html lang="fr">
+<html lang="fr" class="no-js">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Nojah, trader funded</title>
-<meta name="description" content="Nojah, trader funded. Je trade le Nasdaq et je documente tout mon parcours en live : Telegram Nojah HUB, TikTok, Instagram, YouTube, Discord, mes payouts et –20 % sur FTMO.">
-<meta name="theme-color" content="#120A29">
-<meta name="format-detection" content="telephone=no">
+<meta name="description" content="Je trade le Nasdaq en order flow, en live sur TikTok. 31 491 $ de payouts depuis juin 2026. Rejoins Nojah HUB, ma communauté sur Telegram.">
 <link rel="canonical" href="https://azulixnq.github.io/nojah/">
+<meta name="theme-color" content="#0C0C0F">
+<meta name="color-scheme" content="dark">
+<meta name="format-detection" content="telephone=no">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:url" content="https://azulixnq.github.io/nojah/">
 <meta property="og:title" content="Nojah, trader funded">
-<meta property="og:description" content="Je trade le Nasdaq et je documente tout mon parcours en live. Rejoins le Telegram Nojah HUB.">
+<meta property="og:description" content="Je trade le Nasdaq en order flow, en live sur TikTok. Rejoins Nojah HUB, ma communauté sur Telegram.">
 <meta property="og:image" content="https://azulixnq.github.io/nojah/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Nojah, trader funded : je documente mon parcours en live.">
+<meta property="og:image:alt" content="Nojah : je trade le Nasdaq en order flow, en live sur TikTok.">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="preload" href="fonts/poppins-700.woff" as="font" type="font/woff" crossorigin>
+<link rel="preload" href="fonts/nojah-sans.woff2" as="font" type="font/woff2" crossorigin>
+<script>document.documentElement.className = "js";</script>
 <style>
-/* Poppins, the face of his clip captions, self-hosted (Latin subset, SIL OFL 1.1). */
-@font-face { font-family: "Poppins"; src: url("fonts/poppins-400.woff") format("woff"); font-weight: 400; font-style: normal; font-display: swap; }
-@font-face { font-family: "Poppins"; src: url("fonts/poppins-500.woff") format("woff"); font-weight: 500; font-style: normal; font-display: swap; }
-@font-face { font-family: "Poppins"; src: url("fonts/poppins-700.woff") format("woff"); font-weight: 700; font-style: normal; font-display: swap; }
+/* Nojah Sans = Mona Sans (SIL OFL 1.1), sous-ensemble latin, axes largeur 100-125 % et graisse 380-700,
+   zéro non barré en chiffres tabulaires. */
+@font-face {
+  font-family: "Nojah Sans";
+  src: url("fonts/nojah-sans.woff2") format("woff2");
+  font-weight: 380 700;
+  font-stretch: 100% 125%;
+  font-style: normal;
+  font-display: swap;
+}
 
-/* One bold move: the turning "live" ring around his monogram and the violet light behind it.
-   Everything else is flat and quiet. Money is always mint, actions are always orchid. */
+/* Noir des certificats Lucid, vert de leurs montants. Le vert ne sert qu'à l'argent ;
+   les actions sont blanches. Une seule chose est grande : le nom, puis le total. */
 :root {
-  --night: #120A29;   /* page */
-  --dusk: #1D1240;    /* surfaces */
-  --dusk-2: #271855;  /* surface, pressed */
-  --line: #34255F;    /* hairlines */
-  --orchid: #F25BD9;  /* his pink: actions */
-  --plum: #B5179A;    /* pink on light ground */
-  --iris: #8F70FF;    /* second hue of the light */
-  --mint: #52E3A4;    /* money */
-  --pearl: #F7F2FF;   /* text */
-  --haze: #B7A9D9;    /* secondary text */
-  --ink: #1A0A2E;     /* text on pink and pearl */
-  --font: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --bg: #0C0C0F;
+  --raise: #131317;
+  --line: #222228;
+  --line-2: #34343C;
+  --text: #EDEDF0;
+  --muted: #9A9AA6;
+  --faint: #86868F;
+  --money: #3AE68A;
+  --sans: "Nojah Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --gutter: clamp(16px, 4vw, 64px);
+  --maxw: 1520px;
+  --head: 64px;
+  --sec: clamp(80px, 9vw, 152px);
+  /* taille du nom : toute la largeur, sans jamais dépasser la hauteur de l’écran (jambage du j compris) */
+  --name: clamp(84px, min((min(100vw, var(--maxw)) - 2 * var(--gutter) - 16px) / 2.9, (82svh - var(--head) - 100px) / 1.145), 600px);
+  --ease: cubic-bezier(.16, 1, .3, 1);
   color-scheme: dark;
 }
-* { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+*, *::before, *::after { box-sizing: border-box; }
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scrollbar-gutter: stable;
+  background: var(--bg);
+}
 body {
   margin: 0;
-  min-height: 100vh;
-  background: var(--night);
-  color: var(--pearl);
-  font: 400 16px/1.6 var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 17px;
+  font-weight: 430;
+  font-stretch: 100%;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   -webkit-tap-highlight-color: transparent;
+  overflow-x: clip;
 }
-img { display: block; max-width: 100%; height: auto; }
+img, video, svg { display: block; max-width: 100%; }
 a { color: inherit; }
-:focus-visible { outline: 3px solid var(--mint); outline-offset: 3px; }
-.ico { width: 24px; height: 24px; flex: none; }
+h1, h2, h3, p, ol, ul, dl, dd, figure { margin: 0; }
+:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
+.sr {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
+}
+.ico { width: 20px; height: 20px; flex: none; }
+.wrap { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: var(--gutter); }
+.money { color: var(--money); font-variant-numeric: tabular-nums; white-space: nowrap; }
 
-.page {
-  isolation: isolate;
-  max-width: 1040px;
-  margin: 0 auto;
-  padding:
-    max(20px, env(safe-area-inset-top))
-    max(18px, env(safe-area-inset-right))
-    max(28px, env(safe-area-inset-bottom))
-    max(18px, env(safe-area-inset-left));
+.skip {
+  position: absolute; left: 12px; top: -60px; z-index: 50;
+  padding: 10px 14px; border-radius: 8px;
+  background: var(--text); color: var(--bg); font-weight: 560; text-decoration: none;
 }
+.skip:focus { top: 12px; }
 
-/* ---------- profile ---------- */
-.profile {
-  position: relative;
-  max-width: 420px;
-  margin: 0 auto;
-  padding-top: 40px;
-  text-align: center;
+/* ---------- boutons ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 48px; padding: 12px 20px;
+  border: 1px solid transparent; border-radius: 10px;
+  font: 560 16px/1.2 var(--sans); font-stretch: 104%;
+  letter-spacing: -.005em; text-align: center; text-decoration: none;
+  transition: background-color .15s ease, border-color .15s ease, color .15s ease;
 }
-.profile::before {
-  content: "";
-  position: absolute; z-index: -1; left: 50%; top: -20px;
-  width: min(520px, 100vw); height: 380px;
-  transform: translateX(-50%);
-  background:
-    radial-gradient(closest-side at 40% 44%, rgba(242, 91, 217, .36), transparent),
-    radial-gradient(closest-side at 63% 36%, rgba(143, 112, 255, .44), transparent);
-  pointer-events: none;
+.btn .ico { width: 18px; height: 18px; }
+.btn-main { background: var(--text); color: var(--bg); }
+.btn-main:hover { background: #FFFFFF; }
+.btn-line { border-color: var(--line-2); color: var(--text); }
+.btn-line:hover { border-color: #565661; background: rgba(255, 255, 255, .035); }
+.btn:active { transform: translateY(1px); }
+
+/* ---------- en-tête ---------- */
+.top {
+  position: sticky; top: 0; z-index: 20;
+  background: rgba(12, 12, 15, .8);
+  -webkit-backdrop-filter: saturate(1.3) blur(14px);
+  backdrop-filter: saturate(1.3) blur(14px);
+  border-bottom: 1px solid var(--line);
 }
-.avatar {
-  position: relative;
-  display: grid; place-items: center;
-  width: 122px; height: 122px;
-  margin: 0 auto 20px;
-  border-radius: 50%;
+.top-in { display: flex; align-items: center; gap: 8px; height: var(--head); }
+.brand {
+  margin-right: auto;
+  font-size: 20px; font-weight: 600; font-stretch: 125%;
+  letter-spacing: -.03em; line-height: 1; text-decoration: none;
 }
-.avatar::before {
-  content: "";
-  position: absolute; inset: 0;
-  border-radius: 50%;
-  background: conic-gradient(var(--orchid), var(--iris), var(--mint), var(--orchid));
-  animation: turn 10s linear infinite;
+.social { display: flex; gap: 2px; margin: 0; padding: 0; list-style: none; }
+.social a {
+  display: inline-flex; align-items: center; gap: 8px;
+  min-height: 40px; padding: 8px 12px; border-radius: 8px;
+  color: var(--muted); font-size: 15px; text-decoration: none;
+  transition: color .15s ease, background-color .15s ease;
 }
-@keyframes turn { to { transform: rotate(1turn); } }
-.avatar span {
-  position: relative;
-  display: grid; place-items: center;
-  width: 108px; height: 108px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 32% 26%, #34206F, #170D36 72%);
-  box-shadow: 0 0 0 4px var(--night);
-  font-weight: 700; font-size: 52px; line-height: 1; letter-spacing: -.02em;
-  padding-top: .08em;
+.social a:hover { color: var(--text); background: rgba(255, 255, 255, .04); }
+.top .btn { min-height: 38px; padding: 8px 14px; margin-left: 10px; font-size: 14.5px; border-radius: 8px; }
+.top .btn .ico { width: 16px; height: 16px; }
+
+/* ---------- hero ---------- */
+.hero {
+  position: relative; isolation: isolate;
+  display: flex; flex-direction: column;
+  min-height: calc(100svh - var(--head) - var(--name) * .3);
+  background: radial-gradient(80% 65% at 14% 0%, rgba(255, 255, 255, .055), transparent 70%);
 }
-.name {
-  margin: 0;
-  font-weight: 700;
-  font-size: clamp(42px, 12vw, 54px);
-  line-height: 1.05;
-  letter-spacing: -.025em;
+/* le niveau sur lequel le nom est posé */
+.hero::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--line-2) 8%, var(--line-2) 92%, transparent);
+  transform-origin: 0 50%;
+  animation: draw 1.3s var(--ease) both;
+  z-index: -1;
 }
-.bio {
-  margin: 10px auto 0;
-  max-width: 29ch;
+.hero-grid {
+  flex: 1;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  grid-template-areas: "copy" "name";
+  padding-top: clamp(40px, 10vh, 132px);
+}
+.hero-copy { grid-area: copy; align-self: start; }
+.lead {
+  max-width: 19ch;
+  font-size: clamp(28px, 1.9vw + 18px, 50px);
+  font-weight: 470; font-stretch: 104%;
+  line-height: 1.12; letter-spacing: -.026em;
   text-wrap: balance;
-  color: var(--haze);
-  font-size: 16.5px;
-  line-height: 1.55;
 }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: clamp(28px, 3vw, 44px); }
+.actions-note { margin-top: 16px; color: var(--muted); font-size: 15px; }
+.name {
+  grid-area: name; align-self: end;
+  /* la ligne de base du nom tombe pile sur le filet du bas */
+  margin: clamp(48px, 8vh, 96px) 0 -.115em -.045em;
+  font-size: var(--name);
+  font-weight: 600; font-stretch: 125%;
+  line-height: 1; letter-spacing: -.045em;
+  white-space: nowrap;
+}
+.name-clip { display: block; overflow: hidden; padding-bottom: .26em; margin-bottom: -.26em; }
+.name-text { display: block; animation: rise 1.4s var(--ease) .1s both; }
+.hero-copy > * { animation: fade .9s var(--ease) both; }
+.hero-copy > :nth-child(1) { animation-delay: .5s; }
+.hero-copy > :nth-child(2) { animation-delay: .62s; }
+@keyframes draw { from { transform: scaleX(0); } }
+@keyframes rise { from { transform: translateY(1.35em); } }
+@keyframes fade { from { opacity: 0; transform: translateY(12px); } }
 
-/* Telegram, the main door */
-.cta {
-  display: flex; align-items: center; gap: 14px;
-  max-width: 400px; min-height: 68px;
-  margin: 28px auto 0;
-  padding: 12px 20px 12px 13px;
-  border-radius: 20px;
-  background: var(--orchid); color: var(--ink);
-  text-align: left; text-decoration: none;
-  box-shadow: 0 16px 36px -16px rgba(242, 91, 217, .75);
-  transition: transform .12s ease, background-color .12s ease;
+/* ---------- sections ---------- */
+.sec { border-top: 1px solid var(--line); padding-block: var(--sec); }
+.hero + .sec { border-top: 0; }
+.h2 {
+  margin-bottom: clamp(32px, 4vw, 64px);
+  font-size: clamp(30px, 1.6vw + 20px, 46px);
+  font-weight: 560; font-stretch: 112%;
+  line-height: 1.06; letter-spacing: -.03em;
+  text-wrap: balance;
 }
-.cta:hover { background: #F672E0; }
-.cta:active { transform: scale(.98); }
-.cta-ico {
-  flex: none;
-  display: grid; place-items: center;
-  width: 44px; height: 44px;
-  border-radius: 14px;
-  background: var(--ink); color: var(--orchid);
-}
-.cta-ico .ico { width: 22px; height: 22px; }
-.cta-text { flex: 1; }
-.cta-text strong { display: block; font-weight: 700; font-size: 17px; line-height: 1.25; }
-.cta-text small { display: block; margin-top: 1px; font-size: 13.5px; font-weight: 500; line-height: 1.3; color: #4A1F55; }
+.h2:has(+ .intro) { margin-bottom: 18px; }
+.intro { max-width: 52ch; color: var(--muted); font-size: clamp(17px, .4vw + 15px, 20px); text-wrap: pretty; }
 
-/* the four networks */
-.socials {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px;
-  max-width: 400px;
-  margin: 22px auto 0; padding: 0;
-  list-style: none;
+/* ---------- payouts ---------- */
+.pay-head {
+  display: grid; gap: 14px 56px;
+  grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+  align-items: end;
 }
-.socials a {
-  display: grid; justify-items: center; gap: 7px;
-  padding: 4px 0;
-  color: var(--haze); text-decoration: none;
-  font-size: 13px; font-weight: 500; line-height: 1.2;
+.total {
+  font-size: clamp(64px, 11vw, 196px);
+  font-weight: 600; font-stretch: 118%;
+  line-height: .86; letter-spacing: -.04em;
+  color: var(--money); font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.total-num { position: relative; display: inline-block; }
+.total-num .ghost { visibility: hidden; }
+.total-num .live { position: absolute; left: 0; top: 0; }
+.total-sub { max-width: 24ch; color: var(--muted); font-size: clamp(17px, .5vw + 14px, 21px); line-height: 1.4; text-wrap: balance; }
+
+.chart { margin-top: clamp(48px, 6vw, 96px); }
+.chart-cap { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; font-size: 15px; }
+.chart-cap strong { font-weight: 560; font-size: 17px; }
+.chart-cap span { color: var(--muted); }
+.plot-wrap { position: relative; margin-top: 22px; padding-right: 76px; }
+.no-js .plot-wrap { display: none; }
+.plot {
+  position: relative;
+  height: clamp(210px, 25vw, 400px);
+  margin-bottom: 34px;
+  touch-action: pan-y;
+  cursor: crosshair;
+  --reveal: 1;
+}
+.plot:focus-visible { outline-offset: 8px; border-radius: 4px; }
+.plot svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.plot .series { clip-path: inset(-6px calc((1 - var(--reveal)) * 100%) -6px -6px); }
+.grid-y { stroke: var(--line); stroke-width: 1; }
+.grid-0 { stroke: var(--line-2); }
+.line { fill: none; stroke: var(--money); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.last-level { stroke: var(--money); stroke-opacity: .35; stroke-width: 1; }
+.tick-x {
+  position: absolute; top: 100%; padding-top: 10px;
+  color: var(--faint); font-size: 13px; line-height: 1; white-space: nowrap;
+}
+.tick-x::before { content: ""; position: absolute; left: 0; top: 0; height: 6px; border-left: 1px solid var(--line-2); }
+.tick-y {
+  position: absolute; left: calc(100% + 12px);
+  transform: translateY(-50%);
+  color: var(--faint); font-size: 13px; line-height: 1;
+  font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+.last-tag {
+  position: absolute; left: calc(100% + 6px);
+  transform: translateY(-50%);
+  padding: 5px 7px; border-radius: 5px;
+  background: var(--money); color: #06140C;
+  font-size: 13px; font-weight: 600; line-height: 1;
+  font-variant-numeric: tabular-nums; white-space: nowrap;
+  transition: opacity .5s ease;
 }
 .dot {
-  display: grid; place-items: center;
-  width: 56px; height: 56px;
-  border-radius: 50%;
-  background: var(--dusk); border: 1px solid var(--line);
-  color: var(--pearl);
-  transition: border-color .12s ease, background-color .12s ease;
+  position: absolute; width: 10px; height: 10px; margin: -5px 0 0 -5px;
+  border-radius: 50%; background: var(--money);
+  box-shadow: 0 0 0 2px var(--bg);
+  transition: opacity .25s ease, transform .2s ease;
 }
-.socials a:hover { color: var(--pearl); }
-.socials a:hover .dot { border-color: var(--orchid); }
-.socials a:active .dot { background: var(--dusk-2); }
+.dot.is-hidden, .last-tag.is-hidden, .last-level.is-hidden { opacity: 0; }
+.last-level { transition: opacity .5s ease; }
+.dot.is-active { transform: scale(1.35); }
+.cross {
+  position: absolute; top: 0; bottom: 0; width: 0;
+  border-left: 1px solid var(--line-2);
+  pointer-events: none; opacity: 0;
+}
+.tip {
+  position: absolute; top: 0; z-index: 2;
+  min-width: 150px; padding: 10px 12px;
+  border: 1px solid var(--line-2); border-radius: 10px;
+  background: rgba(19, 19, 23, .96);
+  font-size: 13.5px; line-height: 1.4;
+  pointer-events: none; opacity: 0;
+  transition: opacity .12s ease;
+}
+.tip b { display: block; margin: 2px 0; color: var(--money); font-size: 17px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.tip span { color: var(--muted); }
+.tip .tip-cum { display: block; color: var(--muted); font-variant-numeric: tabular-nums; }
+.plot.is-inspecting .cross, .plot.is-inspecting .tip { opacity: 1; }
+.chart-note { margin-top: 26px; max-width: 62ch; color: var(--muted); font-size: 15px; text-wrap: pretty; }
+.chart-note .money { font-weight: 560; }
 
-/* ---------- content ---------- */
-.content { display: grid; gap: 56px; margin-top: 60px; }
-.sec-title {
-  margin: 0 0 16px;
-  font-weight: 700; font-size: 24px; line-height: 1.2; letter-spacing: -.015em;
+.certs-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 24px; margin-top: clamp(56px, 6vw, 96px); padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+.h3 { font-size: 19px; font-weight: 560; font-stretch: 108%; letter-spacing: -.012em; line-height: 1.3; }
+.certs-head p { color: var(--muted); font-size: 15px; }
+.certs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 16px; margin-top: 28px; padding: 0; list-style: none; }
+.cert { display: block; color: inherit; text-decoration: none; border-radius: 8px; }
+.cert img {
+  width: 100%; height: auto; aspect-ratio: 263 / 186; object-fit: cover;
+  border-radius: 8px; background: #101014;
+  box-shadow: 0 0 0 1px var(--line);
+  transition: box-shadow .15s ease;
 }
-.money { color: var(--mint); font-weight: 700; white-space: nowrap; }
+.cert:hover img { box-shadow: 0 0 0 1px #565661; }
+.cert-meta { display: flex; justify-content: space-between; gap: 8px; margin-top: 10px; font-size: 14px; line-height: 1.3; }
+.cert-date { color: var(--muted); }
+.cert-amount { color: var(--money); font-weight: 560; font-variant-numeric: tabular-nums; white-space: nowrap; }
 
-/* payouts: his real Lucid capture, untouched */
-.shot {
-  display: block;
-  overflow: hidden;
-  border-radius: 16px;
-  background: #0A0A0A;
-  border: 1px solid rgba(82, 227, 164, .3);
-  box-shadow: 0 26px 60px -30px rgba(82, 227, 164, .5);
-}
-.shot img { width: 100%; }
-.caption { margin: 16px 0 0; color: var(--haze); }
-.caption strong { color: var(--pearl); font-weight: 500; }
-.hint { margin: 4px 0 0; font-size: 13.5px; color: var(--haze); }
-
-/* FTMO: a coupon you tear off */
-.coupon { color: var(--ink); filter: drop-shadow(0 22px 40px rgba(0, 0, 0, .35)); }
-.coupon-top, .coupon-bottom { position: relative; padding: 22px; }
-.coupon-top {
-  border-radius: 20px 20px 0 0;
-  background:
-    radial-gradient(circle at 0 100%, transparent 13px, var(--pearl) 13.5px) left / 51% 100% no-repeat,
-    radial-gradient(circle at 100% 100%, transparent 13px, var(--pearl) 13.5px) right / 51% 100% no-repeat;
-  padding-bottom: 24px;
-}
-.coupon-bottom {
-  border-radius: 0 0 20px 20px;
-  background:
-    radial-gradient(circle at 0 0, transparent 13px, var(--pearl) 13.5px) left / 51% 100% no-repeat,
-    radial-gradient(circle at 100% 0, transparent 13px, var(--pearl) 13.5px) right / 51% 100% no-repeat;
-  padding-top: 24px;
-}
-.coupon-bottom::before {
-  content: "";
-  position: absolute; top: 0; left: 24px; right: 24px;
-  border-top: 2px dashed rgba(26, 10, 46, .22);
-}
-.off { margin: 0; color: var(--plum); font-weight: 700; font-size: 76px; line-height: .95; letter-spacing: -.04em; }
-.off-what { margin: 6px 0 0; font-weight: 700; font-size: 21px; line-height: 1.25; }
-.off-text { margin: 10px 0 0; color: #3D2A5C; font-size: 15.5px; }
-.fine { margin: 12px 0 0; color: #5B4A7A; font-size: 13px; text-align: center; }
-
-.btn {
-  display: flex; align-items: center; justify-content: center; gap: 10px;
-  min-height: 54px;
-  padding: 12px 20px;
-  border-radius: 14px;
-  font-weight: 700; font-size: 16px; line-height: 1.2;
-  text-align: center; text-decoration: none;
-  transition: transform .12s ease, background-color .12s ease, border-color .12s ease;
-}
-.btn:active { transform: scale(.98); }
-.btn-ink { background: var(--ink); color: var(--pearl); }
-.btn-ink:hover { background: #2C1650; }
-.btn-line { border: 1.5px solid var(--orchid); color: var(--pearl); }
-.btn-line:hover { background: rgba(242, 91, 217, .12); }
-
-/* clipping */
-.clip {
-  padding: 22px;
-  border-radius: 20px;
-  background: var(--dusk);
-  border: 1px solid var(--line);
-}
-.clip-text { margin: 0; color: var(--haze); }
-.steps {
-  display: grid; gap: 14px;
-  margin: 20px 0 22px; padding: 0;
-  list-style: none; counter-reset: step;
-}
-.steps li {
-  counter-increment: step;
-  display: grid; grid-template-columns: 30px 1fr; gap: 12px; align-items: start;
-  color: var(--haze);
-}
+/* ---------- communauté | FTMO | clips ---------- */
+.trio { display: grid; }
+.cell { display: flex; flex-direction: column; align-items: flex-start; padding-block: 48px; border-top: 1px solid var(--line); }
+.cell:first-child { padding-top: 0; border-top: 0; }
+.cell:last-child { padding-bottom: 0; }
+.cell .h2 { margin-bottom: 18px; font-size: clamp(26px, .8vw + 20px, 32px); }
+.cell p { color: var(--muted); max-width: 46ch; text-wrap: pretty; }
+.cell-actions { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; width: fit-content; max-width: 100%; margin-top: 32px; }
+.cell .off { margin: 6px 0 2px; color: var(--text); font-size: clamp(52px, 2vw + 40px, 72px); font-weight: 600; font-stretch: 120%; line-height: 1; letter-spacing: -.04em; white-space: nowrap; }
+.cell .off-what { margin-bottom: 14px; color: var(--text); font-size: 19px; font-weight: 520; }
+.cell .fine { margin-top: 14px; font-size: 13.5px; color: var(--faint); }
+.steps { display: grid; gap: 14px; margin: 24px 0 0; padding: 0; list-style: none; counter-reset: step; }
+.steps li { counter-increment: step; display: grid; grid-template-columns: 28px 1fr; gap: 14px; align-items: start; color: var(--muted); }
 .steps li::before {
   content: counter(step);
+  display: grid; place-items: center; width: 28px; height: 28px; margin-top: -1px;
+  border: 1px solid var(--line-2); border-radius: 50%;
+  color: var(--text); font-size: 13px; font-weight: 560; font-variant-numeric: tabular-nums;
+}
+.steps strong { color: var(--text); font-weight: 560; }
+
+/* ---------- série ---------- */
+.serie-grid { display: grid; gap: 48px; }
+.serie-copy .h2 { margin-bottom: 18px; }
+.episodes { margin-top: 36px; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+.ep { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 4px 20px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+.ep-num { color: var(--faint); font-size: 15px; line-height: 1.6; white-space: nowrap; }
+.ep-title { font-size: 20px; font-weight: 560; font-stretch: 106%; letter-spacing: -.012em; line-height: 1.35; }
+.ep p { grid-column: 2; color: var(--muted); text-wrap: pretty; }
+.serie-video { justify-self: center; width: min(100%, 380px); }
+.serie-video video {
+  width: 100%; height: auto; aspect-ratio: 9 / 16;
+  border-radius: 16px; background: #000;
+  box-shadow: 0 0 0 1px var(--line-2);
+}
+.serie-video figcaption { margin-top: 12px; color: var(--faint); font-size: 14px; text-align: center; }
+
+/* ---------- vidéos ---------- */
+.videos .intro { margin-bottom: clamp(36px, 4vw, 60px); }
+.yt-list { display: grid; gap: 32px 20px; margin: 0 0 clamp(40px, 5vw, 64px); padding: 0; list-style: none; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); align-items: start; }
+.yt-list .is-vertical { max-width: 340px; }
+.yt-list[hidden] { display: none; }
+.yt-frame { position: relative; overflow: hidden; border-radius: 12px; background: #000; box-shadow: 0 0 0 1px var(--line); aspect-ratio: 16 / 9; }
+.yt-list .is-vertical .yt-frame { aspect-ratio: 9 / 16; }
+.yt-frame button { all: unset; position: absolute; inset: 0; cursor: pointer; }
+.yt-frame button:focus-visible { outline: 2px solid var(--text); outline-offset: -4px; border-radius: 12px; }
+.yt-frame img, .yt-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border: 0; }
+.yt-play {
+  position: absolute; left: 50%; top: 50%; width: 64px; height: 44px; margin: -22px 0 0 -32px;
+  border-radius: 12px; background: rgba(12, 12, 15, .82); box-shadow: 0 0 0 1px rgba(255, 255, 255, .18);
   display: grid; place-items: center;
-  width: 30px; height: 30px;
-  border-radius: 50%;
-  border: 1.5px solid var(--orchid);
-  color: var(--pearl);
-  font-weight: 700; font-size: 14px; line-height: 1;
 }
-.steps strong { color: var(--pearl); font-weight: 500; }
-
-/* ---------- footer ---------- */
-.foot {
-  margin-top: 64px; padding-top: 22px;
-  border-top: 1px solid var(--line);
-  color: var(--haze);
-  font-size: 13px; line-height: 1.6;
+.yt-title { margin-top: 12px; font-weight: 520; line-height: 1.4; }
+.profiles { display: grid; margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+.profiles a {
+  display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 4px 16px;
+  padding: 22px 0; border-bottom: 1px solid var(--line);
+  text-decoration: none;
 }
-.foot p { margin: 0 0 10px; max-width: 72ch; }
+.profiles .ico { grid-row: span 2; width: 24px; height: 24px; color: var(--muted); }
+.p-name { font-size: clamp(22px, 1vw + 16px, 30px); font-weight: 560; font-stretch: 112%; letter-spacing: -.025em; line-height: 1.15; }
+.p-handle { grid-column: 2; color: var(--muted); font-size: 15px; }
+.profiles a:hover .p-name { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 5px; }
 
+/* ---------- qui je suis ---------- */
+.facts { display: grid; margin: 0; border-top: 1px solid var(--line); }
+.facts > div { padding: 20px 0; border-bottom: 1px solid var(--line); }
+.facts dt { color: var(--faint); font-size: 14px; }
+.facts dd { margin-top: 4px; font-size: clamp(18px, .4vw + 16px, 21px); line-height: 1.4; text-wrap: pretty; }
+.end {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px 32px;
+  margin-top: clamp(48px, 5vw, 80px);
+}
+.end p { max-width: 40ch; font-size: clamp(19px, .6vw + 16px, 24px); line-height: 1.35; letter-spacing: -.012em; text-wrap: balance; }
+.end p span { color: var(--muted); }
+
+/* ---------- pied de page ---------- */
+.foot { border-top: 1px solid var(--line); padding-block: 48px max(48px, env(safe-area-inset-bottom)); color: var(--faint); font-size: 13.5px; line-height: 1.6; }
+.foot-in { display: grid; gap: 10px; }
+.foot p { max-width: 80ch; }
+
+/* ---------- visionneuse ---------- */
+.viewer {
+  width: 100%; height: 100%; max-width: none; max-height: none;
+  margin: 0; padding: 0; border: 0;
+  background: transparent; color: var(--text);
+}
+.viewer::backdrop { background: rgba(6, 6, 8, .9); }
+.viewer-in { display: grid; place-items: center; min-height: 100%; padding: 64px 16px 24px; }
+.viewer-box { width: min(100%, 600px); }
+.viewer img { width: 100%; height: auto; border-radius: 10px; box-shadow: 0 0 0 1px var(--line-2); background: #101014; }
+.viewer figcaption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; margin-top: 14px; font-size: 15px; }
+.viewer figcaption span { color: var(--muted); }
+.viewer-nav { display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 18px; }
+.viewer-count { min-width: 64px; color: var(--muted); font-size: 14px; text-align: center; font-variant-numeric: tabular-nums; }
+.icon-btn {
+  display: grid; place-items: center; width: 44px; height: 44px; padding: 0;
+  border: 1px solid var(--line-2); border-radius: 10px;
+  background: var(--raise); color: var(--text); cursor: pointer;
+}
+.icon-btn:hover { border-color: #565661; }
+.viewer-close { position: fixed; top: 12px; right: 12px; }
+html.has-viewer { overflow: hidden; }
+
+/* ---------- grands écrans ---------- */
+@media (min-width: 640px) {
+  .certs { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 32px; }
+}
+@media (min-width: 900px) {
+  .certs { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px 20px; }
+  .profiles { grid-template-columns: repeat(3, minmax(0, 1fr)); border-bottom: 1px solid var(--line); }
+  .profiles a { padding: 30px 28px; border-bottom: 0; height: 100%; }
+  .profiles li + li a { border-left: 1px solid var(--line); }
+  .profiles li:first-child a { padding-left: 0; }
+  .facts { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
 @media (min-width: 960px) {
-  .page {
-    display: grid;
-    grid-template-columns: 400px minmax(0, 560px);
-    justify-content: center;
-    column-gap: 80px;
-    padding-top: 48px;
-  }
-  .profile { position: sticky; top: 40px; align-self: start; margin: 0; padding-top: 32px; }
-  .content { margin-top: 0; padding-top: 40px; }
-  .foot { grid-column: 1 / -1; }
+  .serie-grid { grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: clamp(56px, 8vw, 160px); }
+  .serie-copy { max-width: 640px; }
+  .serie-video { width: clamp(300px, calc((100svh - 200px) * 9 / 16), 420px); }
 }
+@media (min-width: 1024px) {
+  .hero-copy { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 32px 64px; }
+  .lead { max-width: 24ch; }
+  .actions { margin-top: 0; }
+  .trio { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .cell { padding: 0 clamp(28px, 3.2vw, 56px); border-top: 0; border-left: 1px solid var(--line); }
+  .cell:first-child { padding-left: 0; border-left: 0; }
+  .cell:last-child { padding-right: 0; }
+  .cell-actions { margin-top: auto; padding-top: 32px; }
+}
+@media (min-width: 1200px) {
+  .certs { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+}
+@media (min-width: 2200px) {
+  :root { --maxw: 1760px; }
+}
+
+/* ---------- petits écrans ---------- */
+@media (max-width: 899px) {
+  .pay-head { grid-template-columns: minmax(0, 1fr); }
+  .hero { min-height: 0; }
+  .hero-grid { padding-top: clamp(40px, 8vw, 72px); }
+  .name { margin-top: clamp(64px, 13vw, 120px); }
+}
+@media (max-width: 760px) {
+  :root { --head: 56px; }
+  .social a { padding: 8px; }
+  .social span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+  .top .btn { margin-left: 6px; }
+}
+@media (max-width: 560px) {
+  body { font-size: 16px; }
+  .plot-wrap { padding-right: 66px; }
+  .tick-y { left: calc(100% + 8px); }
+  .dot { width: 8px; height: 8px; margin: -4px 0 0 -4px; }
+  .actions .btn { flex: 1 1 100%; }
+  .cell-actions { width: 100%; }
+  .ep { grid-template-columns: minmax(0, 1fr); }
+  .ep p { grid-column: 1; }
+  .end .btn { flex: 1 1 100%; }
+}
+@media (max-width: 380px) {
+  .top .btn-text { display: none; }
+  .top .btn { padding: 8px 11px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .avatar::before { animation: none; }
-  .cta, .btn, .dot { transition: none; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+@media (forced-colors: active) {
+  .line { stroke: CanvasText; }
+  .dot, .last-tag { forced-color-adjust: none; }
 }
 </style>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
-  <symbol id="i-send" viewBox="0 0 24 24"><path d="M21.5 3.2 2.9 10.6c-.9.4-.9 1.6 0 1.9l4.6 1.6 1.7 5.4c.3.8 1.3 1 1.9.4l2.6-2.5 4.6 3.4c.7.5 1.7.1 1.9-.7L22.9 4.6c.2-1-.6-1.8-1.4-1.4Z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="m7.6 14.1 10.1-7.3-7.9 8.7" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/></symbol>
-  <symbol id="i-notes" viewBox="0 0 24 24"><path d="M9 18V6.5l11-2.5v12" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><circle cx="6.5" cy="18" r="2.6" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="17.5" cy="16" r="2.6" fill="none" stroke="currentColor" stroke-width="1.9"/></symbol>
-  <symbol id="i-camera" viewBox="0 0 24 24"><path d="M4 7.5h3.2l1.6-2.5h6.4l1.6 2.5H20a1.5 1.5 0 0 1 1.5 1.5v9a1.5 1.5 0 0 1-1.5 1.5H4A1.5 1.5 0 0 1 2.5 18V9A1.5 1.5 0 0 1 4 7.5Z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><circle cx="12" cy="13.2" r="3.6" fill="none" stroke="currentColor" stroke-width="1.9"/></symbol>
-  <symbol id="i-play" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.2" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="m10 8.4 5.8 3.6-5.8 3.6z" fill="currentColor"/></symbol>
-  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 4.5h10.5A1.5 1.5 0 0 1 16 6v6a1.5 1.5 0 0 1-1.5 1.5H9.2L5.5 16.5v-3H4A1.5 1.5 0 0 1 2.5 12V6A1.5 1.5 0 0 1 4 4.5Z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M18.5 8.5H20A1.5 1.5 0 0 1 21.5 10v6a1.5 1.5 0 0 1-1.5 1.5h-1.5v3l-3.7-3H11a1.5 1.5 0 0 1-1.5-1.5v-.3" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/></symbol>
-  <symbol id="i-cut" viewBox="0 0 24 24"><circle cx="6" cy="6" r="3" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="6" cy="18" r="3" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="M8.5 7.5 20 18M8.5 16.5 20 6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></symbol>
+  <symbol id="i-telegram" viewBox="0 0 24 24"><path d="M21.2 3.6 2.9 10.7c-.9.4-.9 1.6 0 1.9l4.5 1.6 1.7 5.3c.3.8 1.3 1 1.9.4l2.6-2.5 4.5 3.3c.7.5 1.7.1 1.9-.7l2.9-14.8c.2-1-.8-1.9-1.7-1.6Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m7.6 14 10-7.1-7.8 8.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+  <symbol id="i-discord" viewBox="0 0 24 24"><path d="M8.3 6.4A15 15 0 0 1 12 6c1.3 0 2.5.1 3.7.4 1.8 2.5 2.7 5.3 2.6 8.6a12.7 12.7 0 0 1-4 2l-.9-1.6M8.3 6.4c-1.8 2.5-2.7 5.3-2.6 8.6a12.7 12.7 0 0 0 4 2l.9-1.6M7.6 14.7c2.9 1.5 5.9 1.5 8.8 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9.7" cy="11.6" r="1.25" fill="currentColor"/><circle cx="14.3" cy="11.6" r="1.25" fill="currentColor"/></symbol>
+  <symbol id="i-tiktok" viewBox="0 0 24 24"><path d="M14 3.5v11a3.8 3.8 0 1 1-3.8-3.8M14 3.5c.5 2.5 2.2 4.2 4.8 4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-instagram" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="3.9" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.2" cy="6.8" r="1.05" fill="currentColor"/></symbol>
+  <symbol id="i-youtube" viewBox="0 0 24 24"><rect x="2.5" y="5.5" width="19" height="13" rx="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m10.2 9.3 4.7 2.7-4.7 2.7z" fill="currentColor"/></symbol>
+  <symbol id="i-scissors" viewBox="0 0 24 24"><circle cx="6" cy="6.5" r="2.8" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="6" cy="17.5" r="2.8" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8.4 8 20 18M8.4 16 20 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-prev" viewBox="0 0 24 24"><path d="m14.5 6-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-next" viewBox="0 0 24 24"><path d="m9.5 6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="m6.5 6.5 11 11m0-11-11 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M8.5 5.8v12.4L18.3 12z" fill="currentColor"/></symbol>
 </svg>
 
-<div class="page">
-  <header class="profile">
-    <div class="avatar" aria-hidden="true"><span>N</span></div>
-    <h1 class="name">Nojah</h1>
-    <p class="bio">Trader funded. Je trade le Nasdaq et je documente tout mon parcours en live.</p>
+<a class="skip" href="#contenu">Aller au contenu</a>
 
-    <a class="cta" href="https://t.me/+zSf9D4ee_4w5NzM0" target="_blank" rel="noopener">
-      <span class="cta-ico"><svg class="ico" aria-hidden="true"><use href="#i-send"/></svg></span>
-      <span class="cta-text"><strong>Rejoindre le Telegram</strong><small>Nojah HUB, la communauté</small></span>
-    </a>
-
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="#haut">Nojah</a>
     <nav aria-label="Mes réseaux">
-      <ul class="socials">
-        <li><a href="https://www.tiktok.com/@nojahonorderflow" target="_blank" rel="noopener" aria-label="TikTok, @nojahonorderflow"><span class="dot"><svg class="ico" aria-hidden="true"><use href="#i-notes"/></svg></span>TikTok</a></li>
-        <li><a href="https://www.instagram.com/fx_nojah" target="_blank" rel="noopener" aria-label="Instagram, @fx_nojah"><span class="dot"><svg class="ico" aria-hidden="true"><use href="#i-camera"/></svg></span>Instagram</a></li>
-        <li><a href="https://www.youtube.com/@FXJohanBDX" target="_blank" rel="noopener" aria-label="YouTube, @FXJohanBDX"><span class="dot"><svg class="ico" aria-hidden="true"><use href="#i-play"/></svg></span>YouTube</a></li>
-        <li><a href="https://discord.gg/zVJuSdCjSG" target="_blank" rel="noopener" aria-label="Discord, le serveur de la communauté"><span class="dot"><svg class="ico" aria-hidden="true"><use href="#i-chat"/></svg></span>Discord</a></li>
+      <ul class="social">
+        <li><a href="https://www.tiktok.com/@nojahonorderflow" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-tiktok"/></svg><span>TikTok</span></a></li>
+        <li><a href="https://www.instagram.com/fx_nojah" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-instagram"/></svg><span>Instagram</span></a></li>
+        <li><a href="https://www.youtube.com/@FXJohanBDX" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-youtube"/></svg><span>YouTube</span></a></li>
       </ul>
     </nav>
-  </header>
+    <a class="btn btn-main" href="https://t.me/+zSf9D4ee_4w5NzM0" target="_blank" rel="noopener" aria-label="Rejoindre Nojah HUB, ma communauté sur Telegram"><svg class="ico" aria-hidden="true"><use href="#i-telegram"/></svg><span class="btn-text">Nojah HUB</span></a>
+  </div>
+</header>
 
-  <main class="content">
-    <section aria-labelledby="payouts-title">
-      <h2 class="sec-title" id="payouts-title">Mes payouts</h2>
-      <a class="shot" href="payouts-lucid.webp" target="_blank" rel="noopener">
-        <img src="payouts-lucid.webp" width="760" height="713" loading="lazy" decoding="async"
-             alt="Capture de mon tableau Lucid Trading, Funded Payouts : 31 491 $ reçus au total, 18 payouts, le plus gros de 2 500 $, depuis juin 2026.">
-      </a>
-      <p class="caption"><strong>18 payouts</strong> reçus sur mes comptes funded Lucid Trading depuis juin 2026, pour un total de <span class="money">31&nbsp;491&nbsp;$</span>. Le plus gros&nbsp;: <span class="money">2&nbsp;500&nbsp;$</span>.</p>
-      <p class="hint">Appuie sur la capture pour la voir en grand.</p>
-    </section>
-
-    <section aria-labelledby="ftmo-title">
-      <h2 class="sec-title" id="ftmo-title">Passe funded toi aussi</h2>
-      <div class="coupon">
-        <div class="coupon-top">
-          <p class="off" aria-hidden="true">–20&nbsp;%</p>
-          <p class="off-what">sur ton challenge FTMO</p>
-          <p class="off-text">Passe par mon lien et ton challenge te coûte 20&nbsp;% moins cher. J’ai moi-même validé les deux étapes du challenge FTMO.</p>
-        </div>
-        <div class="coupon-bottom">
-          <a class="btn btn-ink" href="https://join.ftmo.com/SnUMuuJKSUnsmcjlAEpE" target="_blank" rel="noopener sponsored">Profiter des –20&nbsp;%</a>
-          <p class="fine">Lien affilié. Un challenge est payant et peut être perdu.</p>
+<main id="contenu">
+  <section class="hero" id="haut" aria-labelledby="nom">
+    <div class="wrap hero-grid">
+      <h1 class="name" id="nom"><span class="name-clip"><span class="name-text">Nojah</span></span></h1>
+      <div class="hero-copy">
+        <p class="lead">Je trade le Nasdaq en order&nbsp;flow, en&nbsp;live sur TikTok.</p>
+        <div class="hero-cta">
+          <div class="actions">
+            <a class="btn btn-main" href="https://t.me/+zSf9D4ee_4w5NzM0" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-telegram"/></svg>Rejoindre Nojah HUB</a>
+            <a class="btn btn-line" href="https://discord.gg/zVJuSdCjSG" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-discord"/></svg>Discord de la communauté</a>
+          </div>
+          <p class="actions-note">Nojah HUB, c’est ma communauté sur Telegram.</p>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section aria-labelledby="clip-title">
-      <h2 class="sec-title" id="clip-title">Clippe mes lives</h2>
-      <div class="clip">
-        <p class="clip-text">Je partage les rushs de mes lives sur mon serveur Discord Clipping FxNojah. Tu en fais des clips, tu les postes, et tu es payé selon tes vues.</p>
+  <section class="sec payouts" aria-labelledby="payouts-titre">
+    <div class="wrap">
+      <h2 class="h2" id="payouts-titre">Mes payouts</h2>
+      <div class="pay-head">
+        <p class="total"><span class="sr">31&nbsp;491&nbsp;$</span><span class="total-num" aria-hidden="true"><span class="ghost">31&nbsp;491&nbsp;$</span><span class="live" id="total-live">31&nbsp;491&nbsp;$</span></span></p>
+        <p class="total-sub">de payouts reçus depuis juin&nbsp;2026, toutes prop firms confondues.</p>
+      </div>
+
+      <figure class="chart">
+        <figcaption class="chart-cap"><strong>Lucid Trading</strong><span>Cumul de mes 11&nbsp;payouts, du 11&nbsp;juin au 20&nbsp;août&nbsp;2026</span></figcaption>
+        <div class="plot-wrap">
+          <div class="plot" id="plot" tabindex="0" role="group" aria-roledescription="graphique"
+               aria-label="Courbe du cumul de mes payouts Lucid Trading : 1 165 $ le 11 juin 2026, puis 28 991 $ au 20 août 2026. Utilise les flèches gauche et droite pour parcourir les 11 payouts."></div>
+        </div>
+        <p class="chart-note">Sur les <span class="money">31&nbsp;491&nbsp;$</span>, <span class="money">28&nbsp;991&nbsp;$</span> viennent de Lucid Trading, prouvés par les 11 certificats ci-dessous. Les <span class="money">2&nbsp;500&nbsp;$</span> restants viennent d’autres prop firms.</p>
+      </figure>
+
+      <div class="certs-head">
+        <h3 class="h3">Mes certificats Lucid Trading</h3>
+        <p>Ouvre un certificat pour le voir en grand.</p>
+      </div>
+      <!-- Captures de l’app Lucid Trading, seulement recadrées : les dates et montants viennent des certificats. -->
+      <ul class="certs" id="certs">
+        <li><a class="cert" href="img/certificats/lucid-2026-08-20.webp" data-date="2026-08-20" data-montant="4817"><img src="img/certificats/lucid-2026-08-20.webp" width="263" height="186" loading="lazy" decoding="async" alt="Certificat de payout Lucid Trading au nom de Nojah : 4 817 $, le 20 août 2026."><span class="cert-meta"><span class="cert-date">20&nbsp;août&nbsp;2026</span><span class="cert-amount">4&nbsp;817&nbsp;$</span></span></a></li>
+        <li><a class="cert" href="img/certificats/lucid-2026-08-18.webp" data-date="2026-08-18" data-montant="2000"><img src="img/certificats/lucid-2026-08-18.webp" width="263" height="186" loading="lazy" decoding="async" alt="Certificat de payout Lucid Trading au nom de Nojah : 2 000 $, le 18 août 2026."><span class="cert-meta"><span class="cert-date">18&nbsp;août&nbsp;2026</span><span class="cert-amount">2&nbsp;000&nbsp;$</span></span></a></li>
+        <li><a class="cert" href="img/certificats/lucid-2026-08-17.webp" data-date="2026-08-17" data-montant="3691"><img src="img/certificats/lucid-2026-08-17.webp" width="263" height="186" loading="lazy" decoding="async" alt="Certificat de payout Lucid Trading au nom de Nojah : 3 691 $, le 17 août 2026."><span class="cert-meta"><span class="cert-date">17&nbsp;août&nbsp;2026</span><span class="cert-amount">3&nbsp;691&nbsp;$</span></span></a></li>
+        <li><a class="cert" href="img/certificats/lucid-2026-08-12.webp" data-date="2026-08-12" data-montant="4500"><img src="img/certificats/lucid-2026-08-12.webp" width="263" height="186" loading="lazy" decoding="async" alt="Certificat de payout Lucid Trading au nom de Nojah : 4 500 $, le 12 août 2026."><span class="cert-meta"><span class="cert-date">12&nbsp;août&nbsp;2026</span><span class="cert-amount">4&nbsp;500&nbsp;$</span></span></a></li>
+        <li><a class="cert" href="img/certificats/lucid-2026-08-07.webp" data-date="2026-08-07" data-montant="2500"><img src="img/certificats/lucid-2026-08-07.webp" width="263" height="186" loading="lazy" decoding="async" alt="Certificat de payout Lucid Trading au nom de Nojah : 2 500 $, le 7 août 2026."><span class="cert-meta"><span class="cert-date">7&nbsp;août&nbsp;2026</span><span class="cert-amount">2&nbsp;500&nbsp;$</span></span></a></li>
+        <li><a class="cert" href="img/certificats/lucid-2026-07-31.webp" data-date="2026-07-31" data-montant="2000"><img src="img/certificats/lucid-2026-07-31.webp" width="263" height="186" loading="lazy" decoding="async" alt="Certificat de payout Lucid Trading au nom de Nojah : 2 000 $, le 31 juillet 2026."><span class="cert-meta"><span class="cert-date">31&nbsp;juillet&nbsp;2026</span><span class="cert-amount">2&nbsp;000&nbsp;$</span></span></a></li>
+        <li><a class="cert" href="img/certificats/lucid-2026-07-30.webp" data-date="2026-07-30" data-montant="2500"><img src="img/certificats/lucid-2026-07-30.webp" width="263" height="186" loading="lazy" decoding="async" alt="Certificat de payout Lucid Trading au nom de Nojah : 2 500 $, le 30 juillet 2026. Une bulle « View Certificate » de l’app couvre le bas du montant."><span class="cert-meta"><span class="cert-date">30&nbsp;juillet&nbsp;2026</span><span class="cert-amount">2&nbsp;500&nbsp;$</span></span></a></li>
+        <li><a class="cert" href="img/certificats/lucid-2026-07-24.webp" data-date="2026-07-24" data-montant="2500"><img src="img/certificats/lucid-2026-07-24.webp" width="263" height="186" loading="lazy" decoding="async" alt="Certificat de payout Lucid Trading au nom de Nojah : 2 500 $, le 24 juillet 2026."><span class="cert-meta"><span class="cert-date">24&nbsp;juillet&nbsp;2026</span><span class="cert-amount">2&nbsp;500&nbsp;$</span></span></a></li>
+        <li><a class="cert" href="img/certificats/lucid-2026-07-17.webp" data-date="2026-07-17" data-montant="2000"><img src="img/certificats/lucid-2026-07-17.webp" width="477" height="337" loading="lazy" decoding="async" alt="Certificat de payout Lucid Trading au nom de Nojah : 2 000 $, le 17 juillet 2026."><span class="cert-meta"><span class="cert-date">17&nbsp;juillet&nbsp;2026</span><span class="cert-amount">2&nbsp;000&nbsp;$</span></span></a></li>
+        <li><a class="cert" href="img/certificats/lucid-2026-06-22.webp" data-date="2026-06-22" data-montant="1318"><img src="img/certificats/lucid-2026-06-22.webp" width="477" height="337" loading="lazy" decoding="async" alt="Certificat de payout Lucid Trading au nom de Nojah : 1 318 $, le 22 juin 2026."><span class="cert-meta"><span class="cert-date">22&nbsp;juin&nbsp;2026</span><span class="cert-amount">1&nbsp;318&nbsp;$</span></span></a></li>
+        <li><a class="cert" href="img/certificats/lucid-2026-06-11.webp" data-date="2026-06-11" data-montant="1165"><img src="img/certificats/lucid-2026-06-11.webp" width="477" height="337" loading="lazy" decoding="async" alt="Certificat de payout Lucid Trading au nom de Nojah : 1 165 $, le 11 juin 2026."><span class="cert-meta"><span class="cert-date">11&nbsp;juin&nbsp;2026</span><span class="cert-amount">1&nbsp;165&nbsp;$</span></span></a></li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="sec">
+    <div class="wrap trio">
+      <section class="cell" aria-labelledby="communaute-titre">
+        <h2 class="h2" id="communaute-titre">La communauté</h2>
+        <p>Deux portes d’entrée&nbsp;: Nojah HUB, ma communauté sur Telegram, et le Discord de la communauté.</p>
+        <div class="cell-actions">
+          <a class="btn btn-main" href="https://t.me/+zSf9D4ee_4w5NzM0" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-telegram"/></svg>Rejoindre Nojah HUB</a>
+          <a class="btn btn-line" href="https://discord.gg/zVJuSdCjSG" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-discord"/></svg>Discord de la communauté</a>
+        </div>
+      </section>
+
+      <section class="cell" aria-labelledby="ftmo-titre">
+        <h2 class="h2" id="ftmo-titre">Passe funded toi aussi</h2>
+        <p class="off" aria-hidden="true">−20&nbsp;%</p>
+        <p class="off-what">sur ton challenge FTMO</p>
+        <p>Passe par mon lien et ton challenge te coûte 20&nbsp;% moins cher. J’ai validé les deux étapes du challenge FTMO, le Challenge et la Vérification, en novembre&nbsp;2026.</p>
+        <div class="cell-actions">
+          <a class="btn btn-line" href="https://join.ftmo.com/SnUMuuJKSUnsmcjlAEpE" target="_blank" rel="noopener sponsored">Profiter des −20&nbsp;%</a>
+        </div>
+        <p class="fine">Lien affilié. Un challenge est payant et peut être perdu.</p>
+      </section>
+
+      <section class="cell" aria-labelledby="clips-titre">
+        <h2 class="h2" id="clips-titre">Clippe mes lives</h2>
+        <p>Je partage les rushs de mes lives sur mon serveur Discord Clipping FxNojah. Tu en fais des clips, tu les postes, et tu es payé selon tes vues.</p>
         <ol class="steps">
           <li><span><strong>Rejoins le serveur</strong>, c’est gratuit.</span></li>
           <li><span><strong>Fais vérifier ton compte</strong> en ouvrant un ticket.</span></li>
           <li><span><strong>Déclare chaque clip</strong> dans les 48&nbsp;h qui suivent sa publication.</span></li>
         </ol>
-        <a class="btn btn-line" href="https://discord.gg/uJKeJqDhf" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-cut"/></svg>Rejoindre Clipping FxNojah</a>
-      </div>
-    </section>
-  </main>
+        <div class="cell-actions">
+          <a class="btn btn-line" href="https://discord.gg/uJKeJqDhf" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-scissors"/></svg>Rejoindre Clipping FxNojah</a>
+        </div>
+      </section>
+    </div>
+  </div>
 
-  <footer class="foot">
+  <section class="sec serie" aria-labelledby="serie-titre">
+    <div class="wrap serie-grid">
+      <div class="serie-copy">
+        <h2 class="h2" id="serie-titre">1&nbsp;week-end =&nbsp;1&nbsp;setup order&nbsp;flow</h2>
+        <p class="intro">Ma série order flow&nbsp;: chaque week-end, un setup expliqué en une vidéo.</p>
+        <ol class="episodes">
+          <li class="ep">
+            <span class="ep-num">Épisode 1</span>
+            <span class="ep-title">L’absorption</span>
+            <p>Beaucoup d’achats au marché, et pourtant le prix ne passe pas&nbsp;: un vendeur à limite encaisse tout. Je te montre comment la repérer et comment trier les signaux.</p>
+          </li>
+          <li class="ep">
+            <span class="ep-num">Épisode 2</span>
+            <span class="ep-title">Le volume profile</span>
+            <p>C’est le prochain épisode.</p>
+          </li>
+        </ol>
+      </div>
+      <figure class="serie-video">
+        <video controls playsinline preload="none" poster="video/absorption-v2-affiche.webp" width="720" height="1280" aria-label="Épisode 1 : l’absorption">
+          <source src="video/absorption-v2.mp4" type="video/mp4">
+          <a href="video/absorption-v2.mp4">Télécharger l’épisode 1 en MP4</a>
+        </video>
+        <figcaption>Épisode 1&nbsp;: l’absorption, 1&nbsp;min&nbsp;04</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="sec videos" aria-labelledby="videos-titre">
+    <div class="wrap">
+      <h2 class="h2" id="videos-titre">Mes vidéos</h2>
+      <p class="intro">Je suis en live sur TikTok. Retrouve aussi mes vidéos sur YouTube et Instagram.</p>
+      <ul class="yt-list" id="yt-list" hidden></ul>
+      <ul class="profiles">
+        <li><a href="https://www.tiktok.com/@nojahonorderflow" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-tiktok"/></svg><span class="p-name">TikTok</span><span class="p-handle">@nojahonorderflow</span></a></li>
+        <li><a href="https://www.youtube.com/@FXJohanBDX" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-youtube"/></svg><span class="p-name">YouTube</span><span class="p-handle">@FXJohanBDX</span></a></li>
+        <li><a href="https://www.instagram.com/fx_nojah" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-instagram"/></svg><span class="p-name">Instagram</span><span class="p-handle">@fx_nojah</span></a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec moi" aria-labelledby="moi-titre">
+    <div class="wrap">
+      <h2 class="h2" id="moi-titre">Qui je suis</h2>
+      <dl class="facts">
+        <div><dt>Mon marché</dt><dd>Le Nasdaq, en futures&nbsp;: NQ et MNQ</dd></div>
+        <div><dt>Ma méthode</dt><dd>L’order flow</dd></div>
+        <div><dt>En live</dt><dd>Sur TikTok, pendant que je trade</dd></div>
+        <div><dt>Comptes funded</dt><dd>Lucid Trading, avec des payouts depuis juin&nbsp;2026, et Topstep</dd></div>
+        <div><dt>FTMO</dt><dd>Challenge et Vérification validés en novembre&nbsp;2026</dd></div>
+        <div><dt>En ce moment</dt><dd>La série «&nbsp;1 week-end = 1 setup order flow&nbsp;»</dd></div>
+      </dl>
+      <div class="end">
+        <p>Envie de suivre la suite&nbsp;? <span>Rejoins Nojah HUB, ma communauté sur Telegram.</span></p>
+        <a class="btn btn-main" href="https://t.me/+zSf9D4ee_4w5NzM0" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-telegram"/></svg>Rejoindre Nojah HUB</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
     <p>Le trading comporte un risque élevé de perte en capital. Je partage mon parcours&nbsp;: ce ne sont pas des conseils en investissement, et les résultats passés ne garantissent pas les résultats futurs.</p>
-    <p>Les liens FTMO de cette page sont des liens affiliés. FTMO et Lucid Trading sont des marques de leurs propriétaires.</p>
+    <p>Les liens FTMO de cette page sont des liens affiliés. FTMO, Lucid Trading et Topstep sont des marques de leurs propriétaires.</p>
     <p>© 2026 Nojah. Site hébergé par GitHub Pages.</p>
-  </footer>
-</div>
+  </div>
+</footer>
+
+<dialog class="viewer" id="viewer" aria-label="Certificat de payout">
+  <div class="viewer-in">
+    <div class="viewer-box">
+      <figure>
+        <img id="viewer-img" src="data:," alt="">
+        <figcaption><span id="viewer-date"></span><strong class="money" id="viewer-amount"></strong></figcaption>
+      </figure>
+      <div class="viewer-nav">
+        <button class="icon-btn" type="button" data-step="-1" aria-label="Certificat précédent"><svg class="ico" aria-hidden="true"><use href="#i-prev"/></svg></button>
+        <span class="viewer-count" id="viewer-count"></span>
+        <button class="icon-btn" type="button" data-step="1" aria-label="Certificat suivant"><svg class="ico" aria-hidden="true"><use href="#i-next"/></svg></button>
+      </div>
+    </div>
+  </div>
+  <button class="icon-btn viewer-close" type="button" id="viewer-close" aria-label="Fermer"><svg class="ico" aria-hidden="true"><use href="#i-close"/></svg></button>
+</dialog>
+
+<script>
+/* ==================================================================
+   MES DERNIÈRES VIDÉOS YOUTUBE
+   Ajoute ici jusqu’à 3 vidéos, la plus récente en premier :
+     id     : les 11 caractères après « watch?v= » ou « /shorts/ » dans le lien
+     titre  : le titre exact de la vidéo
+     format : "vertical" pour un Short, "horizontal" pour une vidéo classique
+   Exemple : { id: "XXXXXXXXXXX", titre: "Titre exact", format: "vertical" },
+   Tant que la liste est vide, la section affiche seulement les liens
+   vers TikTok, YouTube et Instagram.
+   ================================================================== */
+var VIDEOS_YOUTUBE = [
+];
+
+(function () {
+  "use strict";
+
+  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var MOIS = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
+  var NB = "\u00A0";
+
+  function dollars(n) {
+    return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, NB) + NB + "$";
+  }
+  function dateFr(iso) {
+    var p = iso.split("-");
+    var d = +p[2];
+    return (d === 1 ? "1er" : d) + NB + MOIS[+p[1] - 1] + NB + p[0];
+  }
+  function utc(iso) {
+    var p = iso.split("-");
+    return Date.UTC(+p[0], +p[1] - 1, +p[2]);
+  }
+  function make(tag, cls, parent) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+
+  /* ---------- les payouts Lucid, lus dans la liste des certificats ---------- */
+  var certLinks = [].slice.call(document.querySelectorAll(".cert"));
+  var payouts = certLinks.map(function (a) {
+    return { date: a.getAttribute("data-date"), amount: +a.getAttribute("data-montant") };
+  }).sort(function (a, b) { return utc(a.date) - utc(b.date); });
+  var running = 0;
+  payouts.forEach(function (p) { running += p.amount; p.cum = running; });
+
+  /* ---------- courbe du cumul (escalier : le cumul monte le jour du payout) ---------- */
+  var plot = document.getElementById("plot");
+  var dots = [], tip, cross, tag;
+  var X0 = Date.UTC(2026, 5, 1), X1 = Date.UTC(2026, 8, 1); // du 1er juin au 1er septembre 2026
+  var YMAX = 30000;
+  function px(iso) { return (utc(iso) - X0) / (X1 - X0) * 1000; }
+  function py(v) { return 1000 - v / YMAX * 1000; }
+
+  if (plot && payouts.length) {
+    var NS = "http://www.w3.org/2000/svg";
+    var svg = document.createElementNS(NS, "svg");
+    svg.setAttribute("viewBox", "0 0 1000 1000");
+    svg.setAttribute("preserveAspectRatio", "none");
+    svg.setAttribute("aria-hidden", "true");
+    var gradId = "aire-payouts";
+    svg.innerHTML =
+      '<defs><linearGradient id="' + gradId + '" x1="0" y1="0" x2="0" y2="1">' +
+      '<stop offset="0" stop-color="#3AE68A" stop-opacity=".16"/>' +
+      '<stop offset="1" stop-color="#3AE68A" stop-opacity="0"/></linearGradient></defs>';
+    [10000, 20000].forEach(function (v) {
+      var l = document.createElementNS(NS, "line");
+      l.setAttribute("x1", 0); l.setAttribute("x2", 1000);
+      l.setAttribute("y1", py(v)); l.setAttribute("y2", py(v));
+      l.setAttribute("class", "grid-y");
+      l.setAttribute("vector-effect", "non-scaling-stroke");
+      svg.appendChild(l);
+    });
+    var base = document.createElementNS(NS, "line");
+    base.setAttribute("x1", 0); base.setAttribute("x2", 1000);
+    base.setAttribute("y1", 1000); base.setAttribute("y2", 1000);
+    base.setAttribute("class", "grid-y grid-0");
+    base.setAttribute("vector-effect", "non-scaling-stroke");
+    svg.appendChild(base);
+
+    var d = "M0 1000";
+    payouts.forEach(function (p) {
+      p.x = px(p.date); p.y = py(p.cum);
+      d += " H" + p.x.toFixed(2) + " V" + p.y.toFixed(2);
+    });
+    var last = payouts[payouts.length - 1];
+    var g = document.createElementNS(NS, "g");
+    g.setAttribute("class", "series");
+    var area = document.createElementNS(NS, "path");
+    area.setAttribute("d", d + " V1000 Z");
+    area.setAttribute("fill", "url(#" + gradId + ")");
+    var line = document.createElementNS(NS, "path");
+    line.setAttribute("d", d);
+    line.setAttribute("class", "line");
+    line.setAttribute("vector-effect", "non-scaling-stroke");
+    g.appendChild(area);
+    g.appendChild(line);
+    svg.appendChild(g);
+    var lvl = document.createElementNS(NS, "line");
+    lvl.setAttribute("x1", last.x); lvl.setAttribute("x2", 1000);
+    lvl.setAttribute("y1", last.y); lvl.setAttribute("y2", last.y);
+    lvl.setAttribute("class", "last-level");
+    lvl.id = "last-level";
+    lvl.setAttribute("vector-effect", "non-scaling-stroke");
+    svg.appendChild(lvl);
+    plot.appendChild(svg);
+
+    [["2026-06-01", "juin"], ["2026-07-01", "juillet"], ["2026-08-01", "août"]].forEach(function (m) {
+      var t = make("span", "tick-x", plot);
+      t.style.left = px(m[0]) / 10 + "%";
+      t.textContent = m[1];
+    });
+    [0, 10000, 20000].forEach(function (v) {
+      var t = make("span", "tick-y", plot);
+      t.style.top = py(v) / 10 + "%";
+      t.textContent = dollars(v);
+    });
+    tag = make("span", "last-tag", plot);
+    tag.style.top = last.y / 10 + "%";
+    tag.textContent = dollars(last.cum);
+
+    payouts.forEach(function (p) {
+      var dot = make("span", "dot", plot);
+      dot.style.left = p.x / 10 + "%";
+      dot.style.top = p.y / 10 + "%";
+      dots.push(dot);
+    });
+
+    cross = make("span", "cross", plot);
+    tip = make("div", "tip", plot);
+    tip.setAttribute("aria-live", "polite");
+    var tipDate = make("span", "", tip);
+    var tipAmount = make("b", "", tip);
+    var tipCum = make("span", "tip-cum", tip);
+
+    var active = -1;
+    function show(i) {
+      if (i < 0 || i >= payouts.length) return;
+      active = i;
+      var p = payouts[i];
+      tipDate.textContent = dateFr(p.date);
+      tipAmount.textContent = "+" + dollars(p.amount);
+      tipCum.textContent = "Cumul\u00A0: " + dollars(p.cum);
+      cross.style.left = p.x / 10 + "%";
+      var w = plot.clientWidth, tw = tip.offsetWidth;
+      var left = p.x / 1000 * w - tw / 2;
+      left = Math.max(0, Math.min(w - tw, left));
+      tip.style.left = left + "px";
+      var topPx = p.y / 1000 * plot.clientHeight;
+      tip.style.top = (topPx - tip.offsetHeight - 16 < 0 ? Math.min(topPx + 16, plot.clientHeight - tip.offsetHeight) : topPx - tip.offsetHeight - 16) + "px";
+      dots.forEach(function (dt, j) { dt.classList.toggle("is-active", j === i); });
+      plot.classList.add("is-inspecting");
+    }
+    function hide() {
+      active = -1;
+      plot.classList.remove("is-inspecting");
+      dots.forEach(function (dt) { dt.classList.remove("is-active"); });
+    }
+    function nearest(clientX) {
+      var r = plot.getBoundingClientRect();
+      var x = (clientX - r.left) / r.width * 1000, best = 0;
+      payouts.forEach(function (p, j) { if (Math.abs(p.x - x) < Math.abs(payouts[best].x - x)) best = j; });
+      return best;
+    }
+    plot.addEventListener("pointermove", function (e) { show(nearest(e.clientX)); });
+    plot.addEventListener("pointerdown", function (e) { show(nearest(e.clientX)); });
+    plot.addEventListener("pointerleave", function (e) { if (e.pointerType === "mouse") hide(); });
+    plot.addEventListener("focus", function () { show(active < 0 ? payouts.length - 1 : active); });
+    plot.addEventListener("blur", hide);
+    plot.addEventListener("keydown", function (e) {
+      var k = e.key, i = active < 0 ? payouts.length - 1 : active;
+      if (k === "ArrowLeft" || k === "ArrowDown") i--;
+      else if (k === "ArrowRight" || k === "ArrowUp") i++;
+      else if (k === "Home") i = 0;
+      else if (k === "End") i = payouts.length - 1;
+      else if (k === "Escape") { hide(); return; }
+      else return;
+      e.preventDefault();
+      show(Math.max(0, Math.min(payouts.length - 1, i)));
+    });
+    document.addEventListener("pointerdown", function (e) { if (!plot.contains(e.target)) hide(); });
+  }
+
+  /* ---------- l’entrée : le total compte et la courbe se trace, une seule fois,
+     quand on les voit et après l’arrivée du nom ---------- */
+  var live = document.getElementById("total-live");
+  var TOTAL = 31491;
+  var canAnimate = !reduceMotion && "IntersectionObserver" in window && window.requestAnimationFrame;
+  function tween(duration, step, done) {
+    var start = null;
+    function frame(ts) {
+      if (start === null) start = ts;
+      var t = Math.min(1, (ts - start) / duration);
+      step(1 - Math.pow(1 - t, 4));
+      if (t < 1) requestAnimationFrame(frame); else if (done) done();
+    }
+    requestAnimationFrame(frame);
+  }
+  function whenSeen(el, ratio, fn) {
+    var io = new IntersectionObserver(function (entries) {
+      if (!entries[0].isIntersecting) return;
+      io.disconnect();
+      setTimeout(fn, Math.max(0, 1000 - performance.now()));
+    }, { threshold: ratio });
+    io.observe(el);
+  }
+  if (canAnimate && live) {
+    live.textContent = dollars(0);
+    whenSeen(document.querySelector(".total"), 0.6, function () {
+      tween(1900, function (e) { live.textContent = dollars(TOTAL * e); }, function () { live.textContent = dollars(TOTAL); });
+    });
+  }
+  if (canAnimate && plot && dots.length) {
+    var lastX = payouts[payouts.length - 1].x / 1000;
+    var levelLine = document.getElementById("last-level");
+    var reveal = function (e) {
+      var r = e * lastX;
+      plot.style.setProperty("--reveal", r.toFixed(4));
+      payouts.forEach(function (p, j) { dots[j].classList.toggle("is-hidden", p.x / 1000 > r + 0.0005); });
+    };
+    reveal(0);
+    tag.classList.add("is-hidden");
+    levelLine.classList.add("is-hidden");
+    whenSeen(plot, 0.5, function () {
+      tween(1900, reveal, function () {
+        plot.style.setProperty("--reveal", "1");
+        tag.classList.remove("is-hidden");
+        levelLine.classList.remove("is-hidden");
+      });
+    });
+  }
+
+  /* ---------- visionneuse des certificats ---------- */
+  var viewer = document.getElementById("viewer");
+  if (viewer && typeof viewer.showModal === "function" && certLinks.length) {
+    var vImg = document.getElementById("viewer-img");
+    var vDate = document.getElementById("viewer-date");
+    var vAmount = document.getElementById("viewer-amount");
+    var vCount = document.getElementById("viewer-count");
+    var vBox = viewer.querySelector(".viewer-box");
+    var current = 0, opener = null;
+    var render = function (i) {
+      current = (i + certLinks.length) % certLinks.length;
+      var a = certLinks[current], img = a.querySelector("img");
+      vImg.src = a.getAttribute("href");
+      vImg.width = img.width; vImg.height = img.height;
+      vImg.setAttribute("width", img.getAttribute("width"));
+      vImg.setAttribute("height", img.getAttribute("height"));
+      vImg.alt = img.alt;
+      vBox.style.width = "min(100%, " + Math.min(600, 2 * (+img.getAttribute("width") || 300)) + "px)";
+      vDate.textContent = "Lucid Trading, " + dateFr(a.getAttribute("data-date"));
+      vAmount.textContent = dollars(+a.getAttribute("data-montant"));
+      vCount.textContent = (current + 1) + " / " + certLinks.length;
+    };
+    certLinks.forEach(function (a, i) {
+      a.addEventListener("click", function (e) {
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
+        e.preventDefault();
+        opener = a;
+        render(i);
+        document.documentElement.classList.add("has-viewer");
+        viewer.showModal();
+      });
+    });
+    [].forEach.call(viewer.querySelectorAll("[data-step]"), function (b) {
+      b.addEventListener("click", function () { render(current + +b.getAttribute("data-step")); });
+    });
+    document.getElementById("viewer-close").addEventListener("click", function () { viewer.close(); });
+    viewer.addEventListener("click", function (e) {
+      if (e.target === viewer || e.target.classList.contains("viewer-in")) viewer.close();
+    });
+    viewer.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowLeft") { e.preventDefault(); render(current - 1); }
+      if (e.key === "ArrowRight") { e.preventDefault(); render(current + 1); }
+    });
+    viewer.addEventListener("close", function () {
+      document.documentElement.classList.remove("has-viewer");
+      if (opener) opener.focus();
+    });
+  }
+
+  /* ---------- vidéos YouTube : vignette d’abord, lecteur au clic ---------- */
+  var list = document.getElementById("yt-list");
+  var videos = (window.VIDEOS_YOUTUBE || []).filter(function (v) {
+    return v && /^[A-Za-z0-9_-]{11}$/.test(v.id || "") && v.titre;
+  }).slice(0, 3);
+  if (list && videos.length) {
+    videos.forEach(function (v) {
+      var li = make("li", v.format === "vertical" ? "is-vertical" : "", list);
+      var frame = make("div", "yt-frame", li);
+      var btn = make("button", "", frame);
+      btn.type = "button";
+      btn.setAttribute("aria-label", "Lire la vidéo : " + v.titre);
+      var img = make("img", "", btn);
+      img.src = "https://img.youtube.com/vi/" + v.id + "/hqdefault.jpg";
+      img.alt = "";
+      img.loading = "lazy";
+      img.decoding = "async";
+      var play = make("span", "yt-play", btn);
+      play.innerHTML = '<svg class="ico" aria-hidden="true"><use href="#i-play"/></svg>';
+      var title = make("p", "yt-title", li);
+      title.textContent = v.titre;
+      btn.addEventListener("click", function () {
+        var f = document.createElement("iframe");
+        f.src = "https://www.youtube-nocookie.com/embed/" + v.id + "?autoplay=1&rel=0";
+        f.title = v.titre;
+        f.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+        f.allowFullscreen = true;
+        f.referrerPolicy = "strict-origin-when-cross-origin";
+        frame.replaceChild(f, btn);
+        f.focus();
+      });
+    });
+    list.hidden = false;
+    var vt = document.getElementById("videos-titre");
+    if (vt) vt.textContent = "Mes dernières vidéos";
+  }
+})();
+</script>
 </body>
 </html>
