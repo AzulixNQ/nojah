@@ -109,8 +109,9 @@ h1, h2, h3, p, ol, ul, dl, dd, figure { margin: 0; }
 .btn .ico { width: 18px; height: 18px; }
 .btn-main { background: var(--text); color: var(--bg); }
 .btn-main:hover { background: #FFFFFF; }
-.btn-line { border-color: var(--line-2); color: var(--text); }
-.btn-line:hover { border-color: #565661; background: rgba(255, 255, 255, .035); }
+.btn-line { border-color: var(--line-2); background-color: rgba(12, 12, 15, .6); color: var(--text); }
+button.btn { cursor: pointer; }
+.btn-line:hover { border-color: #565661; background: #16161A; }
 .btn:active { transform: translateY(1px); }
 
 /* ---------- en-tête ---------- */
@@ -306,6 +307,47 @@ h1, h2, h3, p, ol, ul, dl, dd, figure { margin: 0; }
 .cert-date { color: var(--muted); }
 .cert-amount { color: var(--money); font-weight: 560; font-variant-numeric: tabular-nums; white-space: nowrap; }
 
+.chart-more { margin-top: 22px; }
+
+/* ---------- le mur : mes certificats qui défilent lentement en fond ----------
+   Du haut de la page jusque sous la courbe, puis fondu vers le noir. Construit par le script
+   à partir de la liste .certs ; sans script, il n'y a pas de mur et la grille reste affichée. */
+main { position: relative; isolation: isolate; }
+.bgwall {
+  --wall-w: clamp(150px, 16vw, 280px);
+  --wall-gap: clamp(10px, 1.1vw, 16px);
+  position: absolute; top: 0; left: 0; right: 0; z-index: -1;
+  overflow: hidden; pointer-events: none;
+  opacity: 0; transition: opacity 1.6s ease .3s;
+}
+.bgwall.is-ready { opacity: 1; }
+.bgwall-rows { display: grid; gap: var(--wall-gap); opacity: .3; }
+.wall-track {
+  display: flex; gap: var(--wall-gap); width: max-content;
+  animation: wall-slide var(--dur, 120s) linear infinite;
+  animation-play-state: paused;
+  will-change: transform;
+}
+.wall-row:nth-child(even) .wall-track { animation-direction: reverse; }
+.wall-row.is-on .wall-track { animation-play-state: running; }
+html.has-viewer .wall-row.is-on .wall-track { animation-play-state: paused; }
+@keyframes wall-slide { to { transform: translate3d(calc(-1 * var(--seq, 0px)), 0, 0); } }
+.wall-card {
+  flex: none; width: var(--wall-w); aspect-ratio: 263 / 186;
+  border-radius: 8px; overflow: hidden; background: #101014;
+  box-shadow: 0 0 0 1px var(--line);
+}
+.wall-card img { width: 100%; height: 100%; object-fit: cover; }
+/* un peu plus sombre sous le texte du haut ; plus discret derrière la courbe (--zone : du bas du mur
+   jusqu'au-dessus de la courbe, posé par le script), puis fondu vers le noir sous la courbe */
+.bgwall::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(0deg, var(--bg) 0, rgba(12, 12, 15, .8) 150px, rgba(12, 12, 15, .56) var(--zone, 600px), rgba(12, 12, 15, 0) calc(var(--zone, 600px) + 300px)),
+    linear-gradient(180deg, rgba(12, 12, 15, .55), rgba(12, 12, 15, 0) 760px);
+}
+.has-wall .certs-head, .has-wall .certs { display: none; }
+
 /* ---------- communauté | FTMO | clips ---------- */
 .trio { display: grid; }
 .cell { display: flex; flex-direction: column; align-items: flex-start; padding-block: 48px; border-top: 1px solid var(--line); }
@@ -457,6 +499,8 @@ html.has-viewer { overflow: hidden; }
   .social a { padding: 8px; }
   .social span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
   .top .btn { margin-left: 6px; }
+  .bgwall { --wall-w: 160px; }
+  .bgwall-rows { opacity: .26; }
 }
 @media (max-width: 560px) {
   body { font-size: 16px; }
@@ -514,6 +558,10 @@ html.has-viewer { overflow: hidden; }
 </header>
 
 <main id="contenu">
+  <!-- Le mur : mes certificats Lucid Trading qui défilent lentement en fond, du haut de la page jusque sous la courbe.
+       Le script le remplit à partir de la liste .certs (plus bas), qui reste la source des montants et des dates. -->
+  <div class="bgwall" id="bgwall" aria-hidden="true" hidden><div class="bgwall-rows"></div></div>
+
   <section class="hero" id="haut" aria-labelledby="nom">
     <div class="wrap hero-grid">
       <h1 class="name" id="nom"><span class="name-clip"><span class="name-text">Nojah</span></span></h1>
@@ -544,7 +592,8 @@ html.has-viewer { overflow: hidden; }
           <div class="plot" id="plot" tabindex="0" role="group" aria-roledescription="graphique"
                aria-label="Courbe du cumul de mes payouts Lucid Trading : 1 165 $ le 11 juin 2026, puis 28 991 $ au 20 août 2026. Utilise les flèches gauche et droite pour parcourir les 11 payouts."></div>
         </div>
-        <p class="chart-note">Sur les <span class="money">31&nbsp;491&nbsp;$</span>, <span class="money">28&nbsp;991&nbsp;$</span> viennent de Lucid Trading, prouvés par les 11 certificats ci-dessous. Les <span class="money">2&nbsp;500&nbsp;$</span> restants viennent d’autres prop firms.</p>
+        <p class="chart-note">Sur les <span class="money">31&nbsp;491&nbsp;$</span>, <span class="money">28&nbsp;991&nbsp;$</span> viennent de Lucid Trading, prouvés par mes 11&nbsp;certificats. Les <span class="money">2&nbsp;500&nbsp;$</span> restants viennent d’autres prop firms.</p>
+        <p class="chart-more" id="certs-more" hidden><button class="btn btn-line" type="button" id="certs-open">Voir les 11&nbsp;certificats</button></p>
       </figure>
 
       <div class="certs-head">
@@ -559,7 +608,8 @@ html.has-viewer { overflow: hidden; }
         <li><a class="cert" href="img/certificats/lucid-2026-08-12.webp" data-date="2026-08-12" data-montant="4500"><img src="img/certificats/lucid-2026-08-12.webp" width="263" height="186" loading="lazy" decoding="async" alt="Certificat de payout Lucid Trading au nom de Nojah : 4 500 $, le 12 août 2026."><span class="cert-meta"><span class="cert-date">12&nbsp;août&nbsp;2026</span><span class="cert-amount">4&nbsp;500&nbsp;$</span></span></a></li>
         <li><a class="cert" href="img/certificats/lucid-2026-08-07.webp" data-date="2026-08-07" data-montant="2500"><img src="img/certificats/lucid-2026-08-07.webp" width="263" height="186" loading="lazy" decoding="async" alt="Certificat de payout Lucid Trading au nom de Nojah : 2 500 $, le 7 août 2026."><span class="cert-meta"><span class="cert-date">7&nbsp;août&nbsp;2026</span><span class="cert-amount">2&nbsp;500&nbsp;$</span></span></a></li>
         <li><a class="cert" href="img/certificats/lucid-2026-07-31.webp" data-date="2026-07-31" data-montant="2000"><img src="img/certificats/lucid-2026-07-31.webp" width="263" height="186" loading="lazy" decoding="async" alt="Certificat de payout Lucid Trading au nom de Nojah : 2 000 $, le 31 juillet 2026."><span class="cert-meta"><span class="cert-date">31&nbsp;juillet&nbsp;2026</span><span class="cert-amount">2&nbsp;000&nbsp;$</span></span></a></li>
-        <li><a class="cert" href="img/certificats/lucid-2026-07-30.webp" data-date="2026-07-30" data-montant="2500"><img src="img/certificats/lucid-2026-07-30.webp" width="263" height="186" loading="lazy" decoding="async" alt="Certificat de payout Lucid Trading au nom de Nojah : 2 500 $, le 30 juillet 2026. Une bulle « View Certificate » de l’app couvre le bas du montant."><span class="cert-meta"><span class="cert-date">30&nbsp;juillet&nbsp;2026</span><span class="cert-amount">2&nbsp;500&nbsp;$</span></span></a></li>
+        <!-- data-mur="non" : gardé dans la visionneuse et la courbe, mais pas dans le mur tant que la capture garde la bulle « View Certificate ». -->
+        <li><a class="cert" href="img/certificats/lucid-2026-07-30.webp" data-date="2026-07-30" data-montant="2500" data-mur="non"><img src="img/certificats/lucid-2026-07-30.webp" width="263" height="186" loading="lazy" decoding="async" alt="Certificat de payout Lucid Trading au nom de Nojah : 2 500 $, le 30 juillet 2026. Une bulle « View Certificate » de l’app couvre le bas du montant."><span class="cert-meta"><span class="cert-date">30&nbsp;juillet&nbsp;2026</span><span class="cert-amount">2&nbsp;500&nbsp;$</span></span></a></li>
         <li><a class="cert" href="img/certificats/lucid-2026-07-24.webp" data-date="2026-07-24" data-montant="2500"><img src="img/certificats/lucid-2026-07-24.webp" width="263" height="186" loading="lazy" decoding="async" alt="Certificat de payout Lucid Trading au nom de Nojah : 2 500 $, le 24 juillet 2026."><span class="cert-meta"><span class="cert-date">24&nbsp;juillet&nbsp;2026</span><span class="cert-amount">2&nbsp;500&nbsp;$</span></span></a></li>
         <li><a class="cert" href="img/certificats/lucid-2026-07-17.webp" data-date="2026-07-17" data-montant="2000"><img src="img/certificats/lucid-2026-07-17.webp" width="477" height="337" loading="lazy" decoding="async" alt="Certificat de payout Lucid Trading au nom de Nojah : 2 000 $, le 17 juillet 2026."><span class="cert-meta"><span class="cert-date">17&nbsp;juillet&nbsp;2026</span><span class="cert-amount">2&nbsp;000&nbsp;$</span></span></a></li>
         <li><a class="cert" href="img/certificats/lucid-2026-06-22.webp" data-date="2026-06-22" data-montant="1318"><img src="img/certificats/lucid-2026-06-22.webp" width="477" height="337" loading="lazy" decoding="async" alt="Certificat de payout Lucid Trading au nom de Nojah : 1 318 $, le 22 juin 2026."><span class="cert-meta"><span class="cert-date">22&nbsp;juin&nbsp;2026</span><span class="cert-amount">1&nbsp;318&nbsp;$</span></span></a></li>
@@ -926,6 +976,7 @@ var VIDEOS_YOUTUBE = [
 
   /* ---------- visionneuse des certificats ---------- */
   var viewer = document.getElementById("viewer");
+  var openViewer = null;
   if (viewer && typeof viewer.showModal === "function" && certLinks.length) {
     var vImg = document.getElementById("viewer-img");
     var vDate = document.getElementById("viewer-date");
@@ -946,14 +997,17 @@ var VIDEOS_YOUTUBE = [
       vAmount.textContent = dollars(+a.getAttribute("data-montant"));
       vCount.textContent = (current + 1) + " / " + certLinks.length;
     };
+    openViewer = function (i, from) {
+      opener = from;
+      render(i);
+      document.documentElement.classList.add("has-viewer");
+      viewer.showModal();
+    };
     certLinks.forEach(function (a, i) {
       a.addEventListener("click", function (e) {
         if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
         e.preventDefault();
-        opener = a;
-        render(i);
-        document.documentElement.classList.add("has-viewer");
-        viewer.showModal();
+        openViewer(i, a);
       });
     });
     [].forEach.call(viewer.querySelectorAll("[data-step]"), function (b) {
@@ -971,6 +1025,86 @@ var VIDEOS_YOUTUBE = [
       document.documentElement.classList.remove("has-viewer");
       if (opener) opener.focus();
     });
+  }
+
+  /* ---------- le mur : mes certificats défilent lentement en fond, du haut de la page jusque sous la courbe ---------- */
+  var bgwall = document.getElementById("bgwall");
+  var chartFig = document.querySelector(".payouts .chart");
+  if (bgwall && chartFig && certLinks.length && [].some.call(certLinks, function (a) { return a.getAttribute("data-mur") !== "non"; })) {
+    var rowsBox = bgwall.querySelector(".bgwall-rows");
+    var moreBox = document.getElementById("certs-more");
+    var moreBtn = document.getElementById("certs-open");
+    var nCerts = certLinks.length;
+    var plotEl = document.getElementById("plot");
+    /* les certificats du mur (data-mur="non" : seulement dans la visionneuse) */
+    var onWall = certLinks.map(function (a, i) { return i; }).filter(function (i) {
+      return certLinks[i].getAttribute("data-mur") !== "non";
+    });
+    var nWall = onWall.length;
+    /* vitesse des rangées : un certificat passe toutes les 10 s, divisées par ce nombre */
+    var PACE = [1, 1.25, 1.1, 1.35, 1.05, 1.2];
+
+    var wallCard = function (i) {
+      var a = certLinks[i], src = a.querySelector("img");
+      var c = make("div", "wall-card");
+      var im = make("img", "", c);
+      im.alt = "";
+      im.decoding = "async";
+      im.setAttribute("width", src.getAttribute("width"));
+      im.setAttribute("height", src.getAttribute("height"));
+      im.src = a.getAttribute("href");
+      return c;
+    };
+
+    /* une rangée ne bouge que si elle est à l'écran, et jamais si le téléphone demande moins d'animations */
+    var rowWatch = (!reduceMotion && "IntersectionObserver" in window) ? new IntersectionObserver(function (es) {
+      es.forEach(function (e) { e.target.classList.toggle("is-on", e.isIntersecting); });
+    }, { rootMargin: "100px 0px" }) : null;
+
+    /* assez de rangées pour couvrir le haut de la page, assez de copies par rangée pour boucler sans trou */
+    var builtW = -1, builtH = -1;
+    var buildWall = function () {
+      var vw = bgwall.clientWidth;
+      var h = Math.ceil(chartFig.getBoundingClientRect().bottom - bgwall.parentNode.getBoundingClientRect().top + 48);
+      if (!vw || (vw === builtW && Math.abs(h - builtH) < 2)) return;
+      builtW = vw; builtH = h;
+      bgwall.style.height = h + "px";
+      var plotTop = (plotEl || chartFig).getBoundingClientRect().top - bgwall.getBoundingClientRect().top;
+      bgwall.style.setProperty("--zone", Math.round(h - plotTop + 40) + "px");
+      if (rowWatch) rowWatch.disconnect();
+      rowsBox.textContent = "";
+      var probe = make("div", "wall-track", make("div", "wall-row", rowsBox));
+      probe.appendChild(wallCard(onWall[0]));
+      var box = probe.firstChild.getBoundingClientRect();
+      var gap = parseFloat(getComputedStyle(probe).columnGap) || 0;
+      rowsBox.textContent = "";
+      var seq = nWall * (box.width + gap);
+      var nRows = Math.ceil((h + gap) / (box.height + gap));
+      var copies = Math.ceil(vw / seq) + 1;
+      for (var r = 0; r < nRows; r++) {
+        var row = make("div", "wall-row", rowsBox), t = make("div", "wall-track", row);
+        var off = (r * 4) % nWall;
+        for (var c = 0; c < copies; c++) for (var k = 0; k < nWall; k++) t.appendChild(wallCard(onWall[(off + k) % nWall]));
+        t.style.setProperty("--seq", seq.toFixed(2) + "px");
+        t.style.setProperty("--dur", (seq / (box.width / 10 * PACE[r % PACE.length])).toFixed(1) + "s");
+        if (rowWatch) rowWatch.observe(row);
+      }
+    };
+
+    /* la grille laisse la place au mur ; un bouton ouvre les certificats en grand */
+    chartFig.closest(".payouts").classList.add("has-wall");
+    moreBtn.textContent = "Voir les " + nCerts + NB + "certificats";
+    moreBtn.addEventListener("click", function () {
+      if (openViewer) openViewer(0, moreBtn);
+      else window.location.href = certLinks[0].getAttribute("href");
+    });
+    moreBox.hidden = false;
+    bgwall.hidden = false;
+
+    var showWall = function () { buildWall(); bgwall.classList.add("is-ready"); };
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(showWall); else showWall();
+    var wallTimer;
+    window.addEventListener("resize", function () { clearTimeout(wallTimer); wallTimer = setTimeout(buildWall, 200); });
   }
 
   /* ---------- vidéos YouTube : vignette d’abord, lecteur au clic ---------- */
