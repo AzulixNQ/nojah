@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Noweix HUB, avec Nojah et Weizix</title>
-<meta name="description" content="L’order flow avec Nojah, l’ICT avec Weizix. Nojah trade le Nasdaq en live sur TikTok : 31 491 $ de payouts depuis juin 2026. Rejoins Noweix HUB, notre communauté sur Telegram.">
+<meta name="description" content="L’order flow avec Nojah, l’ICT avec Weizix. Nojah trade le Nasdaq en live sur TikTok : 33 115 $ de payouts depuis juin 2026. Rejoins Noweix HUB, notre communauté sur Telegram.">
 <link rel="canonical" href="https://azulixnq.github.io/nojah/">
 <meta name="theme-color" content="#0C0C0F">
 <meta name="color-scheme" content="dark">
@@ -306,6 +306,10 @@ button.btn { cursor: pointer; }
   transition: box-shadow .15s ease;
 }
 .cert:hover img { box-shadow: 0 0 0 1px #565661; }
+/* une preuve carrée (Topstep) : entière, sur le fond sombre de la carte */
+.cert img.fit-contain, .wall-card img.fit-contain { object-fit: contain; }
+/* les certificats Lucid colorés (octobre 2026) : plus discrets dans le mur, pour que le texte posé dessus reste lisible */
+.wall-card img.mur-doux { filter: saturate(.35) brightness(.55); }
 .cert-meta { display: flex; justify-content: space-between; gap: 8px; margin-top: 10px; font-size: 14px; line-height: 1.3; }
 .cert-date { color: var(--muted); }
 .cert-amount { color: var(--money); font-weight: 560; font-variant-numeric: tabular-nums; white-space: nowrap; }
@@ -571,7 +575,7 @@ html.has-viewer { overflow: hidden; }
 </header>
 
 <main id="contenu">
-  <!-- Le mur : les certificats Lucid Trading de Nojah qui défilent lentement en fond, du haut de la page jusque sous la courbe.
+  <!-- Le mur : les certificats de Nojah (Lucid Trading et Topstep) qui défilent lentement en fond, du haut de la page jusque sous la courbe.
        Le script le remplit à partir de la liste .certs (plus bas), qui reste la source des montants et des dates. -->
   <div class="bgwall" id="bgwall" aria-hidden="true" hidden><div class="bgwall-rows"></div></div>
 
@@ -595,26 +599,30 @@ html.has-viewer { overflow: hidden; }
     <div class="wrap">
       <h2 class="h2" id="payouts-titre">Nos payouts</h2>
       <div class="pay-head">
-        <p class="total"><span class="sr">31&nbsp;491&nbsp;$</span><span class="total-num" aria-hidden="true"><span class="ghost">31&nbsp;491&nbsp;$</span><span class="live" id="total-live">31&nbsp;491&nbsp;$</span></span></p>
+        <p class="total"><span class="sr">33&nbsp;115&nbsp;$</span><span class="total-num" aria-hidden="true"><span class="ghost">33&nbsp;115&nbsp;$</span><span class="live" id="total-live">33&nbsp;115&nbsp;$</span></span></p>
         <p class="total-sub">de payouts reçus depuis juin&nbsp;2026, toutes prop firms confondues.</p>
       </div>
 
       <figure class="chart">
-        <figcaption class="chart-cap"><strong>Lucid Trading</strong><span>Cumul des 11&nbsp;payouts de Nojah, du 11&nbsp;juin au 20&nbsp;août&nbsp;2026</span></figcaption>
+        <figcaption class="chart-cap"><strong>Lucid Trading et Topstep</strong><span>Cumul des 14&nbsp;payouts de Nojah, du 11&nbsp;juin au 19&nbsp;novembre&nbsp;2026</span></figcaption>
         <div class="plot-wrap">
           <div class="plot" id="plot" tabindex="0" role="group" aria-roledescription="graphique"
-               aria-label="Courbe du cumul des payouts Lucid Trading de Nojah : 1 165 $ le 11 juin 2026, puis 28 991 $ au 20 août 2026. Utilise les flèches gauche et droite pour parcourir les 11 payouts."></div>
+               aria-label="Courbe du cumul des payouts de Nojah, chez Lucid Trading et Topstep : 1 165 $ le 11 juin 2026, puis 33 115 $ au 19 novembre 2026. Utilise les flèches gauche et droite pour parcourir les 14 payouts."></div>
         </div>
-        <p class="chart-note">Sur les <span class="money">31&nbsp;491&nbsp;$</span>, <span class="money">28&nbsp;991&nbsp;$</span> viennent de Lucid Trading, prouvés par les 11&nbsp;certificats de Nojah. Les <span class="money">2&nbsp;500&nbsp;$</span> restants viennent d’autres prop firms.</p>
-        <p class="chart-more" id="certs-more" hidden><button class="btn btn-line" type="button" id="certs-open">Voir les 11&nbsp;certificats</button></p>
+        <p class="chart-note">Les <span class="money">33&nbsp;115&nbsp;$</span> sont tous prouvés par les certificats de Nojah&nbsp;: <span class="money">31&nbsp;491&nbsp;$</span> chez Lucid Trading (13&nbsp;certificats) et <span class="money">1&nbsp;624&nbsp;$</span> chez Topstep.</p>
+        <p class="chart-more" id="certs-more" hidden><button class="btn btn-line" type="button" id="certs-open">Voir les 14&nbsp;certificats</button></p>
       </figure>
 
       <div class="certs-head">
-        <h3 class="h3">Les certificats Lucid Trading de Nojah</h3>
-        <p>Ouvre un certificat pour le voir en grand.</p>
+        <h3 class="h3">Les certificats de Nojah</h3>
+        <p>Lucid Trading et Topstep. Ouvre un certificat pour le voir en grand.</p>
       </div>
-      <!-- Captures de l’app Lucid Trading, seulement recadrées : les dates et montants viennent des certificats. -->
+      <!-- Captures des apps Lucid Trading et Topstep, seulement recadrées : les dates et montants viennent des certificats.
+           Sur les certificats d’octobre et de novembre, le QR code et le code du certificat sont masqués. -->
       <ul class="certs" id="certs">
+        <li><a class="cert" href="img/certificats/topstep-2026-11-19.webp" data-date="2026-11-19" data-montant="1624" data-firme="Topstep"><img class="fit-contain" src="img/certificats/topstep-2026-11-19.webp" width="337" height="337" loading="lazy" decoding="async" alt="Preuve de payout Topstep au nom de Nojah (@NojahXD) : 1 624 $, le 19 novembre 2026. QR code masqué."><span class="cert-meta"><span class="cert-date">19&nbsp;novembre&nbsp;2026, Topstep</span><span class="cert-amount">1&nbsp;624&nbsp;$</span></span></a></li>
+        <li><a class="cert" href="img/certificats/lucid-2026-10-23.webp" data-date="2026-10-23" data-montant="1500"><img class="mur-doux" src="img/certificats/lucid-2026-10-23.webp" width="477" height="337" loading="lazy" decoding="async" alt="Certificat de payout Lucid Trading au nom de Nojah : 1 500 $, le 23 octobre 2026. QR code et code du certificat masqués."><span class="cert-meta"><span class="cert-date">23&nbsp;octobre&nbsp;2026</span><span class="cert-amount">1&nbsp;500&nbsp;$</span></span></a></li>
+        <li><a class="cert" href="img/certificats/lucid-2026-10-20.webp" data-date="2026-10-20" data-montant="1000"><img class="mur-doux" src="img/certificats/lucid-2026-10-20.webp" width="477" height="337" loading="lazy" decoding="async" alt="Certificat de payout Lucid Trading au nom de Nojah : 1 000 $, le 20 octobre 2026. QR code et code du certificat masqués."><span class="cert-meta"><span class="cert-date">20&nbsp;octobre&nbsp;2026</span><span class="cert-amount">1&nbsp;000&nbsp;$</span></span></a></li>
         <li><a class="cert" href="img/certificats/lucid-2026-08-20.webp" data-date="2026-08-20" data-montant="4817"><img src="img/certificats/lucid-2026-08-20.webp" width="263" height="186" loading="lazy" decoding="async" alt="Certificat de payout Lucid Trading au nom de Nojah : 4 817 $, le 20 août 2026."><span class="cert-meta"><span class="cert-date">20&nbsp;août&nbsp;2026</span><span class="cert-amount">4&nbsp;817&nbsp;$</span></span></a></li>
         <li><a class="cert" href="img/certificats/lucid-2026-08-18.webp" data-date="2026-08-18" data-montant="2000"><img src="img/certificats/lucid-2026-08-18.webp" width="263" height="186" loading="lazy" decoding="async" alt="Certificat de payout Lucid Trading au nom de Nojah : 2 000 $, le 18 août 2026."><span class="cert-meta"><span class="cert-date">18&nbsp;août&nbsp;2026</span><span class="cert-amount">2&nbsp;000&nbsp;$</span></span></a></li>
         <li><a class="cert" href="img/certificats/lucid-2026-08-17.webp" data-date="2026-08-17" data-montant="3691"><img src="img/certificats/lucid-2026-08-17.webp" width="263" height="186" loading="lazy" decoding="async" alt="Certificat de payout Lucid Trading au nom de Nojah : 3 691 $, le 17 août 2026."><span class="cert-meta"><span class="cert-date">17&nbsp;août&nbsp;2026</span><span class="cert-amount">3&nbsp;691&nbsp;$</span></span></a></li>
@@ -719,7 +727,7 @@ html.has-viewer { overflow: hidden; }
             <div><dt>Son marché</dt><dd>Le Nasdaq, en futures&nbsp;: NQ et MNQ</dd></div>
             <div><dt>Sa méthode</dt><dd>L’order flow</dd></div>
             <div><dt>En live</dt><dd>Sur TikTok, pendant qu’il trade</dd></div>
-            <div><dt>Comptes funded</dt><dd>Lucid Trading, avec des payouts depuis juin&nbsp;2026, et Topstep</dd></div>
+            <div><dt>Comptes funded</dt><dd>Lucid Trading et Topstep, avec des payouts depuis juin&nbsp;2026</dd></div>
             <div><dt>FTMO</dt><dd>Challenge et Vérification validés en novembre&nbsp;2026</dd></div>
             <div><dt>En ce moment</dt><dd>La série «&nbsp;1 week-end = 2 setups&nbsp;»</dd></div>
           </dl>
@@ -806,10 +814,10 @@ var VIDEOS_YOUTUBE = [
     return e;
   }
 
-  /* ---------- les payouts Lucid, lus dans la liste des certificats ---------- */
+  /* ---------- les payouts (Lucid Trading et Topstep), lus dans la liste des certificats ---------- */
   var certLinks = [].slice.call(document.querySelectorAll(".cert"));
   var payouts = certLinks.map(function (a) {
-    return { date: a.getAttribute("data-date"), amount: +a.getAttribute("data-montant") };
+    return { date: a.getAttribute("data-date"), amount: +a.getAttribute("data-montant"), firm: a.getAttribute("data-firme") || "Lucid Trading" };
   }).sort(function (a, b) { return utc(a.date) - utc(b.date); });
   var running = 0;
   payouts.forEach(function (p) { running += p.amount; p.cum = running; });
@@ -817,8 +825,8 @@ var VIDEOS_YOUTUBE = [
   /* ---------- courbe du cumul (escalier : le cumul monte le jour du payout) ---------- */
   var plot = document.getElementById("plot");
   var dots = [], tip, cross, tag;
-  var X0 = Date.UTC(2026, 5, 1), X1 = Date.UTC(2026, 8, 1); // du 1er juin au 1er septembre 2026
-  var YMAX = 30000;
+  var X0 = Date.UTC(2026, 5, 1), X1 = Date.UTC(2026, 11, 1); // du 1er juin au 1er décembre 2026
+  var YMAX = 35000;
   function px(iso) { return (utc(iso) - X0) / (X1 - X0) * 1000; }
   function py(v) { return 1000 - v / YMAX * 1000; }
 
@@ -833,7 +841,7 @@ var VIDEOS_YOUTUBE = [
       '<defs><linearGradient id="' + gradId + '" x1="0" y1="0" x2="0" y2="1">' +
       '<stop offset="0" stop-color="#3AE68A" stop-opacity=".16"/>' +
       '<stop offset="1" stop-color="#3AE68A" stop-opacity="0"/></linearGradient></defs>';
-    [10000, 20000].forEach(function (v) {
+    [10000, 20000, 30000].forEach(function (v) {
       var l = document.createElementNS(NS, "line");
       l.setAttribute("x1", 0); l.setAttribute("x2", 1000);
       l.setAttribute("y1", py(v)); l.setAttribute("y2", py(v));
@@ -875,12 +883,12 @@ var VIDEOS_YOUTUBE = [
     svg.appendChild(lvl);
     plot.appendChild(svg);
 
-    [["2026-06-01", "juin"], ["2026-07-01", "juillet"], ["2026-08-01", "août"]].forEach(function (m) {
+    [["2026-06-01", "juin"], ["2026-07-01", "juil."], ["2026-08-01", "août"], ["2026-09-01", "sept."], ["2026-10-01", "oct."], ["2026-11-01", "nov."]].forEach(function (m) {
       var t = make("span", "tick-x", plot);
       t.style.left = px(m[0]) / 10 + "%";
       t.textContent = m[1];
     });
-    [0, 10000, 20000].forEach(function (v) {
+    [0, 10000, 20000, 30000].forEach(function (v) {
       var t = make("span", "tick-y", plot);
       t.style.top = py(v) / 10 + "%";
       t.textContent = dollars(v);
@@ -908,7 +916,7 @@ var VIDEOS_YOUTUBE = [
       if (i < 0 || i >= payouts.length) return;
       active = i;
       var p = payouts[i];
-      tipDate.textContent = dateFr(p.date);
+      tipDate.textContent = p.firm + ", " + dateFr(p.date);
       tipAmount.textContent = "+" + dollars(p.amount);
       tipCum.textContent = "Cumul\u00A0: " + dollars(p.cum);
       cross.style.left = p.x / 10 + "%";
@@ -954,7 +962,7 @@ var VIDEOS_YOUTUBE = [
   /* ---------- l’entrée : le total compte et la courbe se trace, une seule fois,
      quand on les voit et après l’arrivée du nom ---------- */
   var live = document.getElementById("total-live");
-  var TOTAL = 31491;
+  var TOTAL = 33115;
   var canAnimate = !reduceMotion && "IntersectionObserver" in window && window.requestAnimationFrame;
   function tween(duration, step, done) {
     var start = null;
@@ -1019,7 +1027,7 @@ var VIDEOS_YOUTUBE = [
       vImg.setAttribute("height", img.getAttribute("height"));
       vImg.alt = img.alt;
       vBox.style.width = "min(100%, " + Math.min(600, 2 * (+img.getAttribute("width") || 300)) + "px)";
-      vDate.textContent = "Lucid Trading, " + dateFr(a.getAttribute("data-date"));
+      vDate.textContent = (a.getAttribute("data-firme") || "Lucid Trading") + ", " + dateFr(a.getAttribute("data-date"));
       vAmount.textContent = dollars(+a.getAttribute("data-montant"));
       vCount.textContent = (current + 1) + " / " + certLinks.length;
     };
@@ -1079,6 +1087,7 @@ var VIDEOS_YOUTUBE = [
       im.setAttribute("width", src.getAttribute("width"));
       im.setAttribute("height", src.getAttribute("height"));
       im.src = a.getAttribute("href");
+      im.className = src.className;
       return c;
     };
 
