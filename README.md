@@ -1,6 +1,6 @@
-# Noweix HUB
+# Noweiz HUB
 
-Le site de Noweix HUB, avec Nojah (order flow) et Weizix (ICT) : https://azulixnq.github.io/nojah/ (le lien n'a pas changé).
+Le site de Noweiz HUB, avec Nojah (order flow) et Weizix (ICT) : https://azulixnq.github.io/nojah/ (le lien n'a pas changé).
 
 - `index.html` : la page (le style et le script sont dedans, aucun service extérieur).
 - `img/certificats/` : les 14 preuves de payout de Nojah (13 certificats Lucid Trading et 1 preuve Topstep), recadrées depuis ses captures (aucune n'est refaite) ; sur celles d'octobre et de novembre, le QR code et le code du certificat sont masqués.
