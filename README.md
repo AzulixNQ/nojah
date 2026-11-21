@@ -1,6 +1,6 @@
 # Noweiz HUB
 
-Le site de Noweiz HUB, avec Nojah (order flow) et Weizix (ICT) : https://azulixnq.github.io/nojah/ (le lien n'a pas changé).
+Le site de Noweiz HUB, avec Nojah (order flow) et Weizix (ICT) : https://noweiz.com/ (l'ancien lien https://azulixnq.github.io/nojah/ y renvoie).
 
 - `index.html` : la page (le style et le script sont dedans, aucun service extérieur).
 - `img/certificats/` : les 14 preuves de payout de Nojah (13 certificats Lucid Trading et 1 preuve Topstep), recadrées depuis ses captures (aucune n'est refaite) ; sur celles d'octobre et de novembre, le QR code et le code du certificat sont masqués.
@@ -9,4 +9,4 @@ Le site de Noweiz HUB, avec Nojah (order flow) et Weizix (ICT) : https://azulixn
 - `og.jpg` : l'image qui s'affiche quand on partage le lien. `favicon.svg` et `apple-touch-icon.png` : les icônes.
 - `apercu/` : l'ancien lien de l'aperçu, qui renvoie vers la page.
 
-Mise en ligne : GitHub Pages, branche `main`, dossier racine.
+Mise en ligne : hébergement OVH (offre Perso), site « Noweiz HUB », dossier `hub`, relié par Git à ce dépôt, branche `main`. Après un envoi sur GitHub : console OVH > Hébergements web > Mes sites > ⋮ du site > Git > Déployer. `.htaccess` renvoie `www`, `noweiz.fr` et `noweiz.eu` vers `https://noweiz.com/`. GitHub Pages reste actif seulement pour renvoyer l'ancien lien.

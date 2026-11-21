@@ -1,0 +1,15 @@
+# Noweiz HUB : une seule adresse, https://noweiz.com/
+RewriteEngine On
+
+# Le dossier .git du déploiement ne se lit pas depuis le web
+RedirectMatch 404 ^/\.git
+
+# Toute autre adresse rattachée au site (www, .fr, .eu) renvoie vers noweiz.com
+RewriteCond %{REQUEST_URI} !^/\.well-known/
+RewriteCond %{HTTP_HOST} !^noweiz\.com$ [NC]
+RewriteRule ^(.*)$ https://noweiz.com/$1 [R=301,L]
+
+# http renvoie vers https
+RewriteCond %{REQUEST_URI} !^/\.well-known/
+RewriteCond %{SERVER_PORT} 80
+RewriteRule ^(.*)$ https://noweiz.com/$1 [R=301,L]
