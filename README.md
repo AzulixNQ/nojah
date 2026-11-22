@@ -11,3 +11,6 @@ Le site de Noweiz HUB, avec Nojah (order flow) et Weizix (ICT) : https://noweiz.
 - `academy/` : **un autre site**, la version de test de Noweiz Academy (les comptes), servie sous `test.noweiz.com`. Il est rangé ici parce que l'offre OVH Perso n'accepte qu'un seul site relié à GitHub. Son code source est dans le dépôt `AzulixNQ/noweiz-academy` ; voir `academy/LISEZMOI.md`.
 
 Mise en ligne : hébergement OVH (offre Perso), site « Noweiz HUB », dossier `hub`, relié par Git à ce dépôt, branche `main`. Après un envoi sur GitHub : console OVH > Hébergements web > Mes sites > ⋮ du site > Git > Déployer. `.htaccess` renvoie `www`, `noweiz.fr` et `noweiz.eu` vers `https://noweiz.com/`. GitHub Pages reste actif seulement pour renvoyer l'ancien lien.
+
+## Les rubans de lumière (22/11)
+`rubans.js` dessine les rubans blancs et argentés derrière la page (WebGL). C'est une copie de `academy/assets/rubans.js` (le même fichier que Noweiz Academy, réglé ici avec `data-teinte="argent"` sur la toile) : en cas de changement, recopier l'un dans l'autre.

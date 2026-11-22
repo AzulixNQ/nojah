@@ -24,6 +24,8 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preload" href="fonts/nojah-sans.woff2" as="font" type="font/woff2" crossorigin>
 <script>document.documentElement.className = "js";</script>
+<!-- Les rubans de lumière (22/11) : le même dessin que Noweiz Academy, en blanc et argent. Copie de academy/assets/rubans.js. -->
+<script src="rubans.js" defer></script>
 <style>
 /* Nojah Sans = Mona Sans (SIL OFL 1.1), sous-ensemble latin, axes largeur 100-125 % et graisse 380-700,
    zéro non barré en chiffres tabulaires. */
@@ -320,7 +322,19 @@ button.btn { cursor: pointer; }
 /* ---------- le mur : mes certificats qui défilent lentement en fond ----------
    Du haut de la page jusque sous la courbe, puis fondu vers le noir. Construit par le script
    à partir de la liste .certs ; sans script, il n'y a pas de mur et la grille reste affichée. */
-main { position: relative; isolation: isolate; }
+main { position: relative; z-index: 1; isolation: isolate; }
+
+/* ---------- la lumière (22/11) : des rubans blancs et argentés derrière la page ----------
+   Dessinés par rubans.js sur une toile fixe. Sans WebGL, ou avec « mouvement réduit », il reste une image fixe ou rien. */
+#rubans { position: fixed; left: 0; top: 0; width: 100%; height: 100vh; height: 100lvh; z-index: 0; pointer-events: none; display: block; }
+html:not([data-rubans]) #rubans { display: none; }
+.foot { position: relative; z-index: 1; }
+/* là où les rubans se pincent : à droite du texte d'accueil, au-dessus du nom */
+.foyer { position: absolute; left: 70%; top: 40%; width: 1px; height: 1px; pointer-events: none; }
+/* une ombre douce sous le texte d'accueil : il reste lisible quand un ruban passe derrière */
+.hero { overflow-x: clip; }            /* l'ombre ci-dessous dépasse un peu à droite : pas de défilement de côté pour autant */
+.hero-copy { position: relative; }
+.hero-copy::before { content: ""; position: absolute; z-index: -1; inset: -30% -12% -30% -30%; pointer-events: none; background: radial-gradient(closest-side, rgba(12, 12, 15, .82), rgba(12, 12, 15, .5) 55%, transparent); }
 .bgwall {
   --wall-w: clamp(150px, 16vw, 280px);
   --wall-gap: clamp(10px, 1.1vw, 16px);
@@ -560,6 +574,7 @@ html.has-viewer { overflow: hidden; }
 </svg>
 
 <a class="skip" href="#contenu">Aller au contenu</a>
+<canvas id="rubans" data-teinte="argent" aria-hidden="true"></canvas>
 
 <header class="top">
   <div class="wrap top-in">
@@ -581,6 +596,7 @@ html.has-viewer { overflow: hidden; }
   <div class="bgwall" id="bgwall" aria-hidden="true" hidden><div class="bgwall-rows"></div></div>
 
   <section class="hero" id="haut" aria-labelledby="nom">
+    <i class="foyer" data-foyer aria-hidden="true"></i>
     <div class="wrap hero-grid">
       <h1 class="name" id="nom"><span class="name-clip"><span class="name-text"><span class="name-w">Noweiz</span> <span class="name-w">HUB</span></span></span></h1>
       <div class="hero-copy">
