@@ -854,7 +854,7 @@ function lienDe(c) { const m = c.texte.match(/https?:\/\/\S+/); return m ? m[0] 
       await zoe.fill('#c-essai', 'ailleurs@exemple.fr');
       await Promise.all([zoe.waitForNavigation(), zoe.click('form:has(input[value=essai]) button[type=submit]')]);
       t = await texte(zoe);
-      verif(t.includes('E-mail d\'essai parti par la boîte') && !t.includes('Dernière panne') && recus.length === 3 && recus[2].a === 'ailleurs@exemple.fr' && await sante2() === 'boîte', 'boîte revenue : l\'essai passe, la panne s\'efface');
+      verif(t.includes('OVH a accepté l\'e-mail d\'essai') && !t.includes('Dernière panne') && recus.length === 3 && recus[2].a === 'ailleurs@exemple.fr' && await sante2() === 'boîte', 'boîte revenue : l\'essai passe, la panne s\'efface');
 
       // le serveur ne répond plus du tout : on n'attend pas à chaque e-mail
       await new Promise(r => fausseBoite.close(r));
@@ -879,6 +879,26 @@ function lienDe(c) { const m = c.texte.match(/https?:\/\/\S+/); return m ? m[0] 
       try { fausseBoite.close(); } catch (e) {}
       if (!process.env.NA_GARDER) fs.rmSync(donnees2, { recursive: true, force: true });
     }
+
+    /* ---------- N. l'aperçu du nouveau style ---------- */
+    console.log('N. L\'aperçu du nouveau style');
+    const apercu = await fenetre();
+    await apercu.goto(URL + '/apercu-style');
+    t = await texte(apercu);
+    verif(t.includes('L\'order flow') && t.includes('avec Weizix.') && t.includes('Exemple illustratif') && t.includes('Les chiffres de cet exemple sont inventés'), 'aperçu : le titre, et le footprint annoncé comme un exemple aux chiffres inventés');
+    verif(await apercu.locator('.fp-c').count() === 31 && await apercu.locator('.semaines li').count() === 8 && (await apercu.locator('.faits dt').allInnerTexts()).join('|').includes('13 certificats'), 'aperçu : 31 cases de footprint, 8 semaines, les faits (13 certificats)');
+    verif((await apercu.locator('meta[name=robots]').getAttribute('content')) === 'noindex, nofollow', 'aperçu : jamais référencé');
+    verif(!(await apercu.evaluate(() => document.documentElement.hasAttribute('data-scene'))) && (await apercu.evaluate(() => document.documentElement.getAttribute('data-rubans'))) !== 'animes', 'aperçu en mouvement réduit : pas de scène au défilement, rubans fixes ou absents');
+    const anime = await fenetre({ reducedMotion: 'no-preference' });
+    await anime.goto(URL + '/apercu-style');
+    await pause(400);
+    verif(await anime.evaluate(() => document.documentElement.hasAttribute('data-scene')), 'aperçu : la scène au défilement est en place');
+    const sec = await anime.evaluate(() => { const r = document.querySelector('.rythme').getBoundingClientRect(); return { haut: r.top + window.scrollY, h: r.height }; });
+    await anime.evaluate(y => window.scrollTo(0, y), sec.haut + sec.h - 900 - 40);
+    await pause(700);
+    verif(await anime.evaluate(() => document.querySelectorAll('.rythme-phrase span.dit').length === document.querySelectorAll('.rythme-phrase span').length && document.querySelector('.rythme').hasAttribute('data-fin') && parseFloat(document.querySelector('.rythme-bloc').style.getPropertyValue('--ouvre')) === 1),
+      'aperçu : en bas de la scène, le bloc vert est ouvert, la phrase dite, les semaines affichées');
+    await apercu.context().close(); await anime.context().close();
 
     verif(erreursPage.length === 0, 'aucune erreur de script ni de sécurité dans le navigateur : ' + erreursPage.slice(0, 3).join(' / '));
     const journal = path.join(donnees, 'erreurs.log');
