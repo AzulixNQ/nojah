@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <script>if(/(^|\.)github\.io$/.test(location.hostname))location.replace("https://noweiz.com/"+location.search+location.hash);</script>
 <title>Noweiz HUB, avec Nojah et Weizix</title>
-<meta name="description" content="L’order flow avec Nojah, l’ICT avec Weizix. Nojah trade le Nasdaq en live sur TikTok : 33 115 $ de payouts depuis juin 2026. Rejoins Noweiz HUB, notre communauté sur Telegram.">
+<meta name="description" content="L’order flow avec Nojah, l’ICT avec Weizix. Nojah trade le Nasdaq en live sur TikTok ; avec Weizix, sur les mêmes comptes : 33 115 $ de payouts depuis juin 2026. Rejoins Noweiz HUB, notre communauté sur Telegram.">
 <link rel="canonical" href="https://noweiz.com/">
 <meta name="theme-color" content="#0C0C0F">
 <meta name="color-scheme" content="dark">
@@ -381,6 +381,7 @@ html.has-viewer .wall-row.is-on .wall-track { animation-play-state: paused; }
 .cell .off { margin: 6px 0 2px; color: var(--text); font-size: clamp(52px, 2vw + 40px, 72px); font-weight: 600; font-stretch: 120%; line-height: 1; letter-spacing: -.04em; white-space: nowrap; }
 .cell .off-what { margin-bottom: 14px; color: var(--text); font-size: 19px; font-weight: 520; }
 .cell .fine { margin-top: 14px; font-size: 13.5px; color: var(--faint); }
+.pay-note { margin-top: 12px; max-width: 70ch; font-size: 14.5px; color: var(--muted); }
 .steps { display: grid; gap: 14px; margin: 24px 0 0; padding: 0; list-style: none; counter-reset: step; }
 .steps li { counter-increment: step; display: grid; grid-template-columns: 28px 1fr; gap: 14px; align-items: start; color: var(--muted); }
 .steps li::before {
@@ -619,12 +620,13 @@ html.has-viewer { overflow: hidden; }
         <p class="total"><span class="sr">33&nbsp;115&nbsp;$</span><span class="total-num" aria-hidden="true"><span class="ghost">33&nbsp;115&nbsp;$</span><span class="live" id="total-live">33&nbsp;115&nbsp;$</span></span></p>
         <p class="total-sub">de payouts reçus depuis juin&nbsp;2026, toutes prop firms confondues.</p>
       </div>
+      <p class="fine pay-note">Nojah et Weizix tradent ensemble, sur les mêmes comptes&nbsp;: les certificats sont au nom de Nojah.</p>
 
       <figure class="chart">
-        <figcaption class="chart-cap"><strong>Lucid Trading et Topstep</strong><span>Cumul des 14&nbsp;payouts de Nojah, du 11&nbsp;juin au 19&nbsp;novembre&nbsp;2026</span></figcaption>
+        <figcaption class="chart-cap"><strong>Lucid Trading et Topstep</strong><span>Cumul des 14&nbsp;payouts de Nojah et Weizix, du 11&nbsp;juin au 19&nbsp;novembre&nbsp;2026</span></figcaption>
         <div class="plot-wrap">
           <div class="plot" id="plot" tabindex="0" role="group" aria-roledescription="graphique"
-               aria-label="Courbe du cumul des payouts de Nojah, chez Lucid Trading et Topstep : 1 165 $ le 11 juin 2026, puis 33 115 $ au 19 novembre 2026. Utilise les flèches gauche et droite pour parcourir les 14 payouts."></div>
+               aria-label="Courbe du cumul des payouts de Nojah et Weizix, chez Lucid Trading et Topstep : 1 165 $ le 11 juin 2026, puis 33 115 $ au 19 novembre 2026. Utilise les flèches gauche et droite pour parcourir les 14 payouts."></div>
         </div>
         <p class="chart-note">Les <span class="money">33&nbsp;115&nbsp;$</span> sont tous prouvés par les certificats de Nojah&nbsp;: <span class="money">31&nbsp;491&nbsp;$</span> chez Lucid Trading (13&nbsp;certificats) et <span class="money">1&nbsp;624&nbsp;$</span> chez Topstep.</p>
         <p class="chart-more" id="certs-more" hidden><button class="btn btn-line" type="button" id="certs-open">Voir les 14&nbsp;certificats</button></p>
@@ -744,7 +746,7 @@ html.has-viewer { overflow: hidden; }
             <div><dt>Son marché</dt><dd>Le Nasdaq, en futures&nbsp;: NQ et MNQ</dd></div>
             <div><dt>Sa méthode</dt><dd>L’order flow</dd></div>
             <div><dt>En live</dt><dd>Sur TikTok, pendant qu’il trade</dd></div>
-            <div><dt>Comptes funded</dt><dd>Lucid Trading et Topstep, avec des payouts depuis juin&nbsp;2026</dd></div>
+            <div><dt>Comptes funded</dt><dd>Lucid Trading et Topstep, tradés avec Weizix, avec des payouts depuis juin&nbsp;2026</dd></div>
             <div><dt>FTMO</dt><dd>Challenge et Vérification validés en novembre&nbsp;2026</dd></div>
             <div><dt>En ce moment</dt><dd>La série «&nbsp;1 week-end = 2 setups&nbsp;»</dd></div>
           </dl>
@@ -754,6 +756,7 @@ html.has-viewer { overflow: hidden; }
           <dl class="facts">
             <div><dt>Sa méthode</dt><dd>L’ICT (Inner Circle Trader)</dd></div>
             <div><dt>L’ICT, en bref</dt><dd>La liquidité, la structure du marché et les déséquilibres de prix (fair value gaps)</dd></div>
+            <div><dt>Comptes funded</dt><dd>Lucid Trading et Topstep, tradés avec Nojah, avec des payouts depuis juin&nbsp;2026</dd></div>
             <div><dt>En ce moment</dt><dd>La série «&nbsp;1 week-end = 2 setups&nbsp;», avec Nojah</dd></div>
           </dl>
         </section>
