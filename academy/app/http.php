@@ -23,7 +23,7 @@ function est_https(): bool
         || strtolower((string) ($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '')) === 'https';
 }
 
-/** L'adresse officielle du site, sans barre finale : https://test.noweiz.com */
+/** L'adresse officielle du site, sans barre finale : https://academy.noweiz.com */
 function url_site(string $chemin = ''): string
 {
     return rtrim((string) reglage('url'), '/') . $chemin;
@@ -41,7 +41,7 @@ function verifier_adresse(): void
     $port = parse_url(url_site(), PHP_URL_PORT);
     if ($port) $attendu .= ':' . $port;
     $recu = strtolower((string) ($_SERVER['HTTP_HOST'] ?? ''));
-    if ($recu !== $attendu) {
+    if ($recu !== $attendu && !in_array($recu, array_map('strtolower', (array) reglage('autres_adresses')), true)) {
         http_response_code(421);
         header('Content-Type: text/plain; charset=utf-8');
         exit("Cette adresse n'est pas celle du site.");

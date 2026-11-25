@@ -6,7 +6,8 @@ RewriteEngine On
 RewriteRule ^\.well-known/ - [L]
 
 # Ce dossier est rangé dans celui du HUB : il ne répond que sous l'adresse du site de la formation
-RewriteCond %{HTTP_HOST} !^test\.noweiz\.com$ [NC]
+# (academy.noweiz.com prendra le relais quand son certificat HTTPS sera prêt ; test.noweiz.com y renverra alors)
+RewriteCond %{HTTP_HOST} !^(test|academy)\.noweiz\.com$ [NC]
 RewriteRule ^ - [R=404,L]
 
 # Toujours en HTTPS
