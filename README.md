@@ -8,7 +8,7 @@ Le site de Noweiz HUB, avec Nojah (order flow) et Weizix (ICT) : https://noweiz.
 - `fonts/` : la police du site (licence SIL Open Font License 1.1, voir `fonts/OFL.txt`).
 - `og.jpg` : l'image qui s'affiche quand on partage le lien. `favicon.svg` et `apple-touch-icon.png` : les icônes.
 - `apercu/` : l'ancien lien de l'aperçu, qui renvoie vers la page.
-- `academy/` : **un autre site**, la version de test de Noweiz Academy (les comptes), servie sous `test.noweiz.com`. Il est rangé ici parce que l'offre OVH Perso n'accepte qu'un seul site relié à GitHub. Son code source est dans le dépôt `AzulixNQ/noweiz-academy` ; voir `academy/LISEZMOI.md`.
+- `academy/` : **un autre site**, le site de Noweiz Academy (liste d’attente et comptes), servi sous `academy.noweiz.com` (`test.noweiz.com` y renvoie). Il est rangé ici parce que l'offre OVH Perso n'accepte qu'un seul site relié à GitHub. Son code source est dans le dépôt `AzulixNQ/noweiz-academy` ; voir `academy/LISEZMOI.md`.
 
 Mise en ligne : hébergement OVH (offre Perso), site « Noweiz HUB », dossier `hub`, relié par Git à ce dépôt, branche `main`. Après un envoi sur GitHub : console OVH > Hébergements web > Mes sites > ⋮ du site > Git > Déployer. `.htaccess` renvoie `www`, `noweiz.fr` et `noweiz.eu` vers `https://noweiz.com/`. GitHub Pages reste actif seulement pour renvoyer l'ancien lien.
 
