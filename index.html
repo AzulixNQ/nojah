@@ -176,6 +176,9 @@ button.btn { cursor: pointer; }
 }
 .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: clamp(28px, 3vw, 44px); }
 .actions-note { margin-top: 16px; color: var(--muted); font-size: 15px; }
+.academy-note { margin-top: 6px; }
+.academy-note a { color: var(--text); text-decoration: underline; text-decoration-color: var(--line-2); text-underline-offset: 3px; }
+.academy-note a:hover { text-decoration-color: currentColor; }
 .name {
   grid-area: name; align-self: end;
   /* la ligne de base du nom tombe pile sur le filet du bas */
@@ -607,6 +610,7 @@ html.has-viewer { overflow: hidden; }
             <a class="btn btn-line" href="https://discord.gg/zVJuSdCjSG" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-discord"/></svg>Discord de la communauté</a>
           </div>
           <p class="actions-note">Noweiz&nbsp;HUB, c’est notre communauté sur Telegram.</p>
+          <p class="actions-note academy-note">Notre formation ouvre en 2027&nbsp;: <a href="https://academy.noweiz.com/">rejoins la liste d’attente de Noweiz&nbsp;Academy</a>.</p>
         </div>
       </div>
     </div>
