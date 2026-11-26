@@ -403,13 +403,6 @@ html.has-viewer .wall-row.is-on .wall-track { animation-play-state: paused; }
 .ep-num { color: var(--faint); font-size: 15px; line-height: 1.6; white-space: nowrap; }
 .ep-title { font-size: 20px; font-weight: 560; font-stretch: 106%; letter-spacing: -.012em; line-height: 1.35; }
 .ep p { grid-column: 2; color: var(--muted); text-wrap: pretty; }
-.serie-video { justify-self: center; width: min(100%, 380px); }
-.serie-video video {
-  width: 100%; height: auto; aspect-ratio: 9 / 16;
-  border-radius: 16px; background: #000;
-  box-shadow: 0 0 0 1px var(--line-2);
-}
-.serie-video figcaption { margin-top: 12px; color: var(--faint); font-size: 14px; text-align: center; }
 
 /* ---------- vidéos ---------- */
 .videos .intro { margin-bottom: clamp(36px, 4vw, 60px); }
@@ -496,9 +489,7 @@ html.has-viewer { overflow: hidden; }
   .who .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (min-width: 960px) {
-  .serie-grid { grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: clamp(56px, 8vw, 160px); }
   .serie-copy { max-width: 640px; }
-  .serie-video { width: clamp(300px, calc((100svh - 200px) * 9 / 16), 420px); }
 }
 @media (min-width: 1024px) {
   .hero-copy { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 32px 64px; }
@@ -718,13 +709,6 @@ html.has-viewer { overflow: hidden; }
           </li>
         </ol>
       </div>
-      <figure class="serie-video">
-        <video controls playsinline preload="none" poster="video/absorption-v2-affiche.webp" width="720" height="1280" aria-label="Épisode 1 : l’absorption">
-          <source src="video/absorption-v2.mp4" type="video/mp4">
-          <a href="video/absorption-v2.mp4">Télécharger l’épisode 1 en MP4</a>
-        </video>
-        <figcaption>Épisode 1&nbsp;: l’absorption, 1&nbsp;min&nbsp;04</figcaption>
-      </figure>
     </div>
   </section>
 
